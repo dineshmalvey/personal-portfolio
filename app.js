@@ -12,7 +12,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThreeJsWaveBackground();
   init3DHologramCore();
-  initLusionMagneticCursor();
   initCard3DTiltAndSpotlights();
   initAudioSynthesizer();
   initTextScramble();
@@ -328,64 +327,7 @@ function init3DHologramCore() {
 }
 
 /* =====================================================================
-   3. LUSION-STYLE MAGNETIC DUAL-RING CURSOR
-   ===================================================================== */
-function initLusionMagneticCursor() {
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  if (!dot || !ring) return;
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
-  });
-
-  function updateCursor() {
-    // Spring damping interpolation (lerp)
-    ringX += (mouseX - ringX) * 0.16;
-    ringY += (mouseY - ringY) * 0.16;
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
-
-    requestAnimationFrame(updateCursor);
-  }
-
-  updateCursor();
-
-  // Magnetic Snapping & Scaling on interactive targets
-  const magneticElements = document.querySelectorAll(
-    'a, button, .magnetic-target, .inno-tab, .t-chip, .chip-btn, .kpi-btn, .skill-filter-btn'
-  );
-
-  magneticElements.forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      ring.classList.add('active');
-    });
-
-    el.addEventListener('mouseleave', () => {
-      ring.classList.remove('active');
-      el.style.transform = '';
-    });
-
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const relX = e.clientX - rect.left - rect.width / 2;
-      const relY = e.clientY - rect.top - rect.height / 2;
-      // Subtle magnetic attraction pull
-      el.style.transform = `translate(${relX * 0.12}px, ${relY * 0.12}px)`;
-    });
-  });
-}
-
-/* =====================================================================
-   4. 3D PERSPECTIVE TILT PHYSICS & DYNAMIC MOUSE SPOTLIGHTS
+   3. 3D PERSPECTIVE TILT PHYSICS & DYNAMIC MOUSE SPOTLIGHTS
    ===================================================================== */
 function initCard3DTiltAndSpotlights() {
   const cards = document.querySelectorAll('.spotlight-card, [data-tilt]');

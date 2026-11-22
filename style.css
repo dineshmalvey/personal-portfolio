@@ -95,48 +95,6 @@ body {
 }
 
 /* =====================================================================
-   LUSION-STYLE CUSTOM MAGNETIC CURSOR
-   ===================================================================== */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  background-color: var(--primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background-color 0.2s;
-  box-shadow: 0 0 10px var(--primary);
-}
-
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 38px;
-  height: 38px;
-  border: 1.5px solid var(--primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s cubic-bezier(0.19, 1, 0.22, 1),
-              height 0.25s cubic-bezier(0.19, 1, 0.22, 1),
-              border-color 0.2s,
-              background-color 0.2s;
-}
-
-.cursor-ring.active {
-  width: 58px;
-  height: 58px;
-  background-color: rgba(var(--primary-rgb), 0.15);
-  border-color: #fff;
-}
-
-/* =====================================================================
    WEBGL 3D MOVING BACKGROUND & AMBIENT GLOW ORBS
    ===================================================================== */
 #webgl-canvas {
@@ -2361,8 +2319,6 @@ a:hover {
   .cyber-grid-overlay,
   .scanline-overlay,
   .kinetic-ticker-wrap,
-  .cursor-dot,
-  .cursor-ring,
   .hud-header,
   .hud-footer,
   .cyber-toast,
@@ -2520,10 +2476,6 @@ a:hover {
 
   .mobile-toggle {
     display: block;
-  }
-
-  .cursor-dot, .cursor-ring {
-    display: none; /* Disable custom cursor on touch devices */
   }
 
   .hud-btn-dossier span {
