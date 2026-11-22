@@ -1,11 +1,19 @@
 /**
- * DINESH MALVEY - FUTURISTIC INTERACTIVE PORTFOLIO & RESUME
- * Core Logic: Canvas Particle Engine, Cyber Audio Synthesizer,
- * CLI Terminal, Matcher Simulator, Theme Engine & Controls
+ * DINESH MALVEY - LUSION-INSPIRED 3D INTERACTIVE PORTFOLIO & RESUME
+ * Core Systems:
+ * 1. Full-screen WebGL 3D Particle Fluid Wave Simulation (Three.js)
+ * 2. 3D Interactive Holographic Neural Core (Drag-to-Orbit Three.js Canvas)
+ * 3. Fluid Magnetic Dual-Ring Cursor with Spring Damping
+ * 4. 3D Perspective Tilt Physics & Mouse Spotlights on Cards
+ * 5. Web Audio API Sci-Fi Synthesizer
+ * 6. CLI Terminal, Interactive Matcher Simulator & KPI Controller
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initParticleBackground();
+  initThreeJsWaveBackground();
+  init3DHologramCore();
+  initLusionMagneticCursor();
+  initCard3DTiltAndSpotlights();
   initAudioSynthesizer();
   initTextScramble();
   initTypingEffect();
@@ -23,158 +31,392 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =====================================================================
-   1. MOVING BACKGROUND: INTERACTIVE NEURAL PARTICLE CANVAS
+   1. THREE.JS 3D PARTICLE FLUID WAVE BACKGROUND (LUSION-STYLE)
    ===================================================================== */
-let particleThemeColors = {
-  primary: 'rgba(0, 240, 255, ',
-  secondary: 'rgba(112, 0, 255, '
+let globalThreeTheme = {
+  primaryHex: 0x00f0ff,
+  secondaryHex: 0x7000ff
 };
 
-function initParticleBackground() {
-  const canvas = document.getElementById('bg-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+let bgWaveParticles = null;
+let bgScene = null;
 
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+function initThreeJsWaveBackground() {
+  const canvas = document.getElementById('webgl-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
 
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  bgScene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    1,
+    2000
+  );
+  camera.position.set(0, 320, 520);
+  camera.lookAt(0, 0, 0);
+
+  // Responsive resize
   window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    initParticles();
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
+  // Particle Wave Grid Geometry
+  const SEPARATION_X = 28;
+  const SEPARATION_Y = 28;
+  const AMOUNT_X = 65;
+  const AMOUNT_Y = 65;
+  const numParticles = AMOUNT_X * AMOUNT_Y;
+
+  const positions = new Float32Array(numParticles * 3);
+  const scales = new Float32Array(numParticles);
+
+  let i = 0;
+  for (let ix = 0; ix < AMOUNT_X; ix++) {
+    for (let iy = 0; iy < AMOUNT_Y; iy++) {
+      positions[i] = ix * SEPARATION_X - (AMOUNT_X * SEPARATION_X) / 2; // x
+      positions[i + 1] = 0; // y (will be animated)
+      positions[i + 2] = iy * SEPARATION_Y - (AMOUNT_Y * SEPARATION_Y) / 2; // z
+      scales[i / 3] = 1.0;
+      i += 3;
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+
+  // Custom Shader Material for Glowing 3D Particles
+  const particleMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      color: { value: new THREE.Color(globalThreeTheme.primaryHex) }
+    },
+    vertexShader: `
+      attribute float scale;
+      void main() {
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = scale * ( 240.0 / - mvPosition.z );
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 color;
+      void main() {
+        float r = length(gl_PointCoord - vec2(0.5));
+        if (r > 0.5) discard;
+        float alpha = smoothstep(0.5, 0.05, r);
+        gl_FragColor = vec4( color, alpha * 0.75 );
+      }
+    `,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthTest: false
+  });
+
+  bgWaveParticles = new THREE.Points(geometry, particleMaterial);
+  bgScene.add(bgWaveParticles);
+
+  // Mouse reaction coordinates
   const mouse = {
-    x: width / 2,
-    y: height / 2,
-    radius: 140,
-    active: false
+    x: 0,
+    y: 0,
+    targetX: 0,
+    targetY: 0
   };
 
   window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    mouse.active = true;
+    mouse.targetX = (e.clientX - window.innerWidth / 2) * 0.45;
+    mouse.targetY = (e.clientY - window.innerHeight / 2) * 0.35;
   });
 
-  window.addEventListener('mouseleave', () => {
-    mouse.active = false;
-  });
+  let count = 0;
 
-  // Particle Class
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.9;
-      this.vy = (Math.random() - 0.5) * 0.9;
-      this.radius = Math.random() * 2 + 1;
-      this.baseRadius = this.radius;
-      this.alpha = Math.random() * 0.6 + 0.2;
-      this.depth = Math.random() * 0.5 + 0.5;
-    }
+  function animate() {
+    requestAnimationFrame(animate);
 
-    update() {
-      this.x += this.vx * this.depth;
-      this.y += this.vy * this.depth;
+    // Smooth camera inertia
+    mouse.x += (mouse.targetX - mouse.x) * 0.04;
+    mouse.y += (mouse.targetY - mouse.y) * 0.04;
+    camera.position.x = mouse.x;
+    camera.position.y = 320 - mouse.y;
+    camera.lookAt(0, 0, 0);
 
-      // Wrap boundaries
-      if (this.x < 0) this.x = width;
-      if (this.x > width) this.x = 0;
-      if (this.y < 0) this.y = height;
-      if (this.y > height) this.y = 0;
+    // Animate fluid wave elevation
+    const positionAttr = geometry.attributes.position;
+    const array = positionAttr.array;
+    count += 0.04;
 
-      // Mouse interactivity (gentle gravity / repulsive wave)
-      if (mouse.active) {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+    let idx = 0;
+    for (let ix = 0; ix < AMOUNT_X; ix++) {
+      for (let iy = 0; iy < AMOUNT_Y; iy++) {
+        // Multi-layered sine wave for organic fluid motion
+        const elevation =
+          Math.sin((ix + count) * 0.3) * 36 +
+          Math.sin((iy + count) * 0.4) * 36 +
+          Math.sin((ix + iy + count) * 0.2) * 20;
 
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          const angle = Math.atan2(dy, dx);
-          this.x -= Math.cos(angle) * force * 2.5;
-          this.y -= Math.sin(angle) * force * 2.5;
-          this.radius = this.baseRadius + force * 2.5;
-        } else {
-          this.radius = this.baseRadius;
-        }
+        array[idx + 1] = elevation;
+        idx += 3;
       }
     }
 
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `${particleThemeColors.primary}${this.alpha})`;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = `${particleThemeColors.primary}0.8)`;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    }
+    positionAttr.needsUpdate = true;
+    renderer.render(bgScene, camera);
   }
 
-  let particles = [];
-  function initParticles() {
-    particles = [];
-    const count = Math.floor((width * height) / 12000);
-    const cappedCount = Math.min(Math.max(count, 45), 110);
-    for (let i = 0; i < cappedCount; i++) {
-      particles.push(new Particle());
-    }
-  }
-
-  initParticles();
-
-  function render() {
-    ctx.clearRect(0, 0, width, height);
-
-    // Update and draw particles
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update();
-      particles[i].draw();
-
-      // Connect near particles
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 120) {
-          const alpha = (1 - dist / 120) * 0.25;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `${particleThemeColors.primary}${alpha})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-
-      // Connect to mouse cursor
-      if (mouse.active) {
-        const mdx = particles[i].x - mouse.x;
-        const mdy = particles[i].y - mouse.y;
-        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < 140) {
-          const mAlpha = (1 - mdist / 140) * 0.45;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `${particleThemeColors.secondary}${mAlpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-      }
-    }
-
-    requestAnimationFrame(render);
-  }
-
-  render();
+  animate();
 }
 
 /* =====================================================================
-   2. SCI-FI AUDIO SYNTHESIZER (WEB AUDIO API - ZERO EXTERNAL ASSETS)
+   2. 3D INTERACTIVE HOLOGRAPHIC NEURAL CORE (HERO THREE.JS CANVAS)
+   ===================================================================== */
+function init3DHologramCore() {
+  const container = document.getElementById('hologramContainer');
+  const canvas = document.getElementById('hologramCanvas');
+  if (!container || !canvas || typeof THREE === 'undefined') return;
+
+  const width = 220;
+  const height = 220;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(width, height);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+  camera.position.z = 5.2;
+
+  // Central Hologram: Wireframe Torus Knot
+  const knotGeo = new THREE.TorusKnotGeometry(1.2, 0.38, 100, 16);
+  const knotMat = new THREE.MeshBasicMaterial({
+    color: globalThreeTheme.primaryHex,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.8
+  });
+  const knotMesh = new THREE.Mesh(knotGeo, knotMat);
+  scene.add(knotMesh);
+
+  // Outer orbital rings
+  const ringGeo = new THREE.RingGeometry(2.1, 2.14, 64);
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: globalThreeTheme.secondaryHex,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.6
+  });
+  const ring1 = new THREE.Mesh(ringGeo, ringMat);
+  ring1.rotation.x = Math.PI / 3;
+  scene.add(ring1);
+
+  const ring2 = new THREE.Mesh(ringGeo, ringMat);
+  ring2.rotation.y = Math.PI / 2.5;
+  scene.add(ring2);
+
+  // Particle aura inside the core
+  const auraCount = 140;
+  const auraGeo = new THREE.BufferGeometry();
+  const auraPos = new Float32Array(auraCount * 3);
+  for (let i = 0; i < auraCount * 3; i += 3) {
+    auraPos[i] = (Math.random() - 0.5) * 3.5;
+    auraPos[i + 1] = (Math.random() - 0.5) * 3.5;
+    auraPos[i + 2] = (Math.random() - 0.5) * 3.5;
+  }
+  auraGeo.setAttribute('position', new THREE.BufferAttribute(auraPos, 3));
+  const auraMat = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.05,
+    transparent: true,
+    opacity: 0.7
+  });
+  const auraPoints = new THREE.Points(auraGeo, auraMat);
+  scene.add(auraPoints);
+
+  // Interactive Orbit Drag Controls
+  let isDragging = false;
+  let previousMousePosition = { x: 0, y: 0 };
+  let momentum = { x: 0.006, y: 0.009 };
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    previousMousePosition = { x: e.clientX, y: e.clientY };
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - previousMousePosition.x;
+    const deltaY = e.clientY - previousMousePosition.y;
+
+    knotMesh.rotation.y += deltaX * 0.015;
+    knotMesh.rotation.x += deltaY * 0.015;
+    ring1.rotation.z += deltaX * 0.01;
+    ring2.rotation.z += deltaY * 0.01;
+
+    momentum = { x: deltaY * 0.002, y: deltaX * 0.002 };
+    previousMousePosition = { x: e.clientX, y: e.clientY };
+  });
+
+  // Touch support for mobile
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    const deltaX = e.touches[0].clientX - previousMousePosition.x;
+    const deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+    knotMesh.rotation.y += deltaX * 0.015;
+    knotMesh.rotation.x += deltaY * 0.015;
+    previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  });
+
+  function renderHologram() {
+    requestAnimationFrame(renderHologram);
+
+    if (!isDragging) {
+      // Natural ambient rotation with residual momentum
+      knotMesh.rotation.y += momentum.y;
+      knotMesh.rotation.x += momentum.x;
+      momentum.x *= 0.985;
+      momentum.y *= 0.985;
+
+      // Keep minimum idle spin
+      if (Math.abs(momentum.x) < 0.003) momentum.x = 0.003;
+      if (Math.abs(momentum.y) < 0.005) momentum.y = 0.005;
+
+      ring1.rotation.z += 0.004;
+      ring2.rotation.z -= 0.006;
+      auraPoints.rotation.y += 0.002;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  renderHologram();
+
+  // Expose color updater for theme switches
+  window.updateHologramTheme = (hexPrimary, hexSecondary) => {
+    knotMat.color.setHex(hexPrimary);
+    ringMat.color.setHex(hexSecondary);
+  };
+}
+
+/* =====================================================================
+   3. LUSION-STYLE MAGNETIC DUAL-RING CURSOR
+   ===================================================================== */
+function initLusionMagneticCursor() {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = `${mouseX}px`;
+    dot.style.top = `${mouseY}px`;
+  });
+
+  function updateCursor() {
+    // Spring damping interpolation (lerp)
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    requestAnimationFrame(updateCursor);
+  }
+
+  updateCursor();
+
+  // Magnetic Snapping & Scaling on interactive targets
+  const magneticElements = document.querySelectorAll(
+    'a, button, .magnetic-target, .inno-tab, .t-chip, .chip-btn, .kpi-btn, .skill-filter-btn'
+  );
+
+  magneticElements.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      ring.classList.add('active');
+    });
+
+    el.addEventListener('mouseleave', () => {
+      ring.classList.remove('active');
+      el.style.transform = '';
+    });
+
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      // Subtle magnetic attraction pull
+      el.style.transform = `translate(${relX * 0.12}px, ${relY * 0.12}px)`;
+    });
+  });
+}
+
+/* =====================================================================
+   4. 3D PERSPECTIVE TILT PHYSICS & DYNAMIC MOUSE SPOTLIGHTS
+   ===================================================================== */
+function initCard3DTiltAndSpotlights() {
+  const cards = document.querySelectorAll('.spotlight-card, [data-tilt]');
+
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Update mouse spotlight position variables
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+
+      // 3D Perspective Tilt computation
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -6; // Max 6deg
+      const rotateY = ((x - centerX) / centerX) * 6;  // Max 6deg
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+}
+
+/* =====================================================================
+   5. SCI-FI AUDIO SYNTHESIZER (WEB AUDIO API - ZERO EXTERNAL ASSETS)
    ===================================================================== */
 let audioCtx = null;
 let soundEnabled = true;
@@ -194,7 +436,6 @@ function initAudioSynthesizer() {
     return audioCtx;
   }
 
-  // Play synthetic Sci-Fi tone
   window.playCyberTone = (type = 'click') => {
     if (!soundEnabled) return;
     try {
@@ -210,17 +451,17 @@ function initAudioSynthesizer() {
 
       if (type === 'click') {
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, now);
-        osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+        osc.frequency.setValueAtTime(820, now);
+        osc.frequency.exponentialRampToValueAtTime(320, now + 0.05);
         gain.gain.setValueAtTime(0.08, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
         osc.start(now);
         osc.stop(now + 0.05);
       } else if (type === 'hover') {
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(450, now);
-        osc.frequency.exponentialRampToValueAtTime(600, now + 0.04);
-        gain.gain.setValueAtTime(0.03, now);
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(620, now + 0.04);
+        gain.gain.setValueAtTime(0.025, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
         osc.start(now);
         osc.stop(now + 0.04);
@@ -229,7 +470,7 @@ function initAudioSynthesizer() {
         osc.frequency.setValueAtTime(520, now);
         osc.frequency.setValueAtTime(780, now + 0.08);
         osc.frequency.setValueAtTime(1040, now + 0.16);
-        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.setValueAtTime(0.08, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
         osc.start(now);
         osc.stop(now + 0.25);
@@ -237,7 +478,7 @@ function initAudioSynthesizer() {
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(320, now);
         osc.frequency.exponentialRampToValueAtTime(180, now + 0.06);
-        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.setValueAtTime(0.045, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
         osc.start(now);
         osc.stop(now + 0.06);
@@ -269,7 +510,7 @@ function initAudioSynthesizer() {
 }
 
 /* =====================================================================
-   3. TEXT SCRAMBLE / DECODER EFFECT
+   6. TEXT SCRAMBLE / DECODER EFFECT
    ===================================================================== */
 function initTextScramble() {
   const el = document.getElementById('scrambleName');
@@ -298,7 +539,7 @@ function initTextScramble() {
         clearInterval(interval);
       }
       iteration += 1 / 2;
-    }, 30);
+    }, 28);
   }
 
   scramble();
@@ -306,7 +547,7 @@ function initTextScramble() {
 }
 
 /* =====================================================================
-   4. TYPING ROLE SUBTITLE EFFECT
+   7. TYPING ROLE SUBTITLE EFFECT
    ===================================================================== */
 function initTypingEffect() {
   const typingEl = document.getElementById('typingRole');
@@ -354,7 +595,7 @@ function initTypingEffect() {
 }
 
 /* =====================================================================
-   5. STATS ANIMATED COUNTERS
+   8. STATS ANIMATED COUNTERS
    ===================================================================== */
 function initStatCounters() {
   const statCards = document.querySelectorAll('.stat-number[data-target]');
@@ -392,7 +633,7 @@ function initStatCounters() {
 }
 
 /* =====================================================================
-   6. INNOVATION LAB TABS
+   9. INNOVATION LAB TABS
    ===================================================================== */
 function initInnovationTabs() {
   const tabs = document.querySelectorAll('.inno-tab');
@@ -413,7 +654,7 @@ function initInnovationTabs() {
 }
 
 /* =====================================================================
-   7. INTERACTIVE MATCHER SIMULATOR (RAPIDFUZZ + ML EMBEDDINGS)
+   10. INTERACTIVE MATCHER SIMULATOR (RAPIDFUZZ + ML EMBEDDINGS)
    ===================================================================== */
 function initMatcherSimulator() {
   const input = document.getElementById('matcherInput');
@@ -425,7 +666,6 @@ function initMatcherSimulator() {
   const barFill = document.getElementById('simConfidenceBar');
   const sampleChips = document.querySelectorAll('#matcherSamples .chip-btn');
 
-  // Simulated Knowledge Base of Master Accounts
   const masterDatabase = [
     { name: 'Phreesia Inc.', keys: ['phreesia', 'healthcare', 'patient'] },
     { name: 'Rayden Design Studio Pvt Ltd', keys: ['rayden', 'design', 'studio'] },
@@ -437,7 +677,6 @@ function initMatcherSimulator() {
   function evaluateMatch(inputVal) {
     if (!inputVal.trim()) return;
 
-    // Normalization & Token Set Simulation
     const clean = inputVal.toLowerCase().replace(/[^a-z0-9 ]/g, '');
     let bestMaster = masterDatabase[0];
     let highestTokenScore = 55;
@@ -454,11 +693,9 @@ function initMatcherSimulator() {
       }
     });
 
-    // Embedding Distance calculation (simulated cosine similarity)
     const cosineSim = (0.84 + Math.random() * 0.14).toFixed(3);
     const confidencePct = (highestTokenScore * 0.5 + parseFloat(cosineSim) * 50).toFixed(1);
 
-    // Update UI with simulated calculation
     masterResult.innerText = bestMaster.name;
     tokenScore.innerText = `${highestTokenScore}%`;
     embedScore.innerText = `${cosineSim} cos(θ)`;
@@ -494,7 +731,7 @@ function initMatcherSimulator() {
 }
 
 /* =====================================================================
-   8. KPI METRIC INTERACTIVE SIMULATOR
+   11. KPI METRIC INTERACTIVE SIMULATOR
    ===================================================================== */
 function initKpiSimulator() {
   const buttons = document.querySelectorAll('#kpiButtons .kpi-btn');
@@ -551,7 +788,7 @@ function initKpiSimulator() {
 }
 
 /* =====================================================================
-   9. SKILLS MATRIX FILTER
+   12. SKILLS MATRIX FILTER
    ===================================================================== */
 function initSkillsFilter() {
   const filterBtns = document.querySelectorAll('.skill-filter-btn');
@@ -578,7 +815,7 @@ function initSkillsFilter() {
 }
 
 /* =====================================================================
-   10. INTERACTIVE CYBER TERMINAL CLI
+   13. INTERACTIVE CYBER TERMINAL CLI
    ===================================================================== */
 function initCyberTerminal() {
   const terminalForm = document.getElementById('terminalForm');
@@ -709,7 +946,7 @@ Foundation in quantitative economics, commercial statistics, and accounting.`,
 }
 
 /* =====================================================================
-   11. THEME ENGINE & SWITCHER
+   14. THEME ENGINE & SWITCHER (SYNCS THREE.JS COLORS)
    ===================================================================== */
 function initThemeEngine() {
   const themeBtn = document.getElementById('themeToggleBtn');
@@ -741,21 +978,31 @@ function setCyberTheme(theme) {
   document.body.setAttribute('data-theme', theme);
 
   if (theme === 'cyan') {
-    particleThemeColors.primary = 'rgba(0, 240, 255, ';
-    particleThemeColors.secondary = 'rgba(112, 0, 255, ';
+    globalThreeTheme.primaryHex = 0x00f0ff;
+    globalThreeTheme.secondaryHex = 0x7000ff;
   } else if (theme === 'purple') {
-    particleThemeColors.primary = 'rgba(217, 70, 239, ';
-    particleThemeColors.secondary = 'rgba(59, 130, 246, ';
+    globalThreeTheme.primaryHex = 0xd946ef;
+    globalThreeTheme.secondaryHex = 0x3b82f6;
   } else if (theme === 'emerald') {
-    particleThemeColors.primary = 'rgba(0, 255, 157, ';
-    particleThemeColors.secondary = 'rgba(14, 165, 233, ';
+    globalThreeTheme.primaryHex = 0x00ff9d;
+    globalThreeTheme.secondaryHex = 0x0ea5e9;
+  }
+
+  // Update Three.js Wave Shader Uniform
+  if (bgWaveParticles && bgWaveParticles.material.uniforms) {
+    bgWaveParticles.material.uniforms.color.value.setHex(globalThreeTheme.primaryHex);
+  }
+
+  // Update 3D Hologram Core colors
+  if (window.updateHologramTheme) {
+    window.updateHologramTheme(globalThreeTheme.primaryHex, globalThreeTheme.secondaryHex);
   }
 
   showToast(`THEME APPLIED: ${theme.toUpperCase()}`);
 }
 
 /* =====================================================================
-   12. CLIPBOARD COPY TRIGGERS & TOAST NOTIFICATION
+   15. CLIPBOARD COPY TRIGGERS & TOAST NOTIFICATION
    ===================================================================== */
 function initCopyTriggers() {
   const triggers = document.querySelectorAll('.copy-trigger');
@@ -772,7 +1019,6 @@ function initCopyTriggers() {
     });
   });
 
-  // Transmission Contact Form
   const transmissionForm = document.getElementById('transmissionForm');
   if (transmissionForm) {
     transmissionForm.addEventListener('submit', (e) => {
@@ -806,7 +1052,7 @@ function showToast(message) {
 }
 
 /* =====================================================================
-   13. LIVE TELEMETRY CLOCK (INDIA STANDARD TIME)
+   16. LIVE TELEMETRY CLOCK (INDIA STANDARD TIME)
    ===================================================================== */
 function initLiveClock() {
   const clockEl = document.getElementById('liveClock');
@@ -814,7 +1060,6 @@ function initLiveClock() {
 
   function update() {
     const now = new Date();
-    // Format in IST / UTC+05:30
     const timeStr = now.toLocaleTimeString('en-US', {
       timeZone: 'Asia/Kolkata',
       hour12: false,
@@ -830,7 +1075,7 @@ function initLiveClock() {
 }
 
 /* =====================================================================
-   14. PRINT / PDF EXPORT HANDLER
+   17. PRINT / PDF EXPORT HANDLER
    ===================================================================== */
 function initPrintHandler() {
   const printBtn = document.getElementById('printResumeBtn');
@@ -845,7 +1090,7 @@ function initPrintHandler() {
 }
 
 /* =====================================================================
-   15. MOBILE NAVIGATION TOGGLE
+   18. MOBILE NAVIGATION TOGGLE
    ===================================================================== */
 function initMobileNav() {
   const toggleBtn = document.getElementById('mobileMenuBtn');

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dinesh Malvey // Senior Data Analyst & BI Specialist</title>
-  <meta name="description" content="Interactive futuristic portfolio & resume of Dinesh Malvey, Senior Data Analyst specializing in Business Intelligence, Applied ML, and Process Automation.">
+  <title>Dinesh Malvey // Senior Data Analyst &amp; BI Specialist</title>
+  <meta name="description" content="Immersive 3D interactive portfolio & resume of Dinesh Malvey, Senior Data Analyst specializing in Business Intelligence, Applied ML, and Process Automation.">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,37 +14,47 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Three.js for 3D WebGL Visuals & Particle Simulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-theme="cyan">
-  <!-- Moving Background Interactive Canvas -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- Custom Cyber Magnetic Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- WebGL 3D Interactive Moving Background (Three.js) -->
+  <canvas id="webgl-canvas"></canvas>
+  <div class="ambient-glow-orb orb-1"></div>
+  <div class="ambient-glow-orb orb-2"></div>
+  <div class="ambient-glow-orb orb-3"></div>
   <div class="cyber-grid-overlay"></div>
   <div class="scanline-overlay"></div>
 
-  <!-- Audio Synthesizer Notification / Status Bar -->
+  <!-- HUD NAVIGATION HEADER -->
   <header class="hud-header">
     <div class="hud-container">
-      <div class="hud-brand">
+      <div class="hud-brand magnetic-target">
         <span class="hud-indicator pulse"></span>
         <a href="#hero" class="brand-logo">DM<span class="accent-text">//01</span></a>
         <span class="brand-tag">SENIOR_ANALYST.EXE</span>
       </div>
 
       <nav class="hud-nav" id="hudNav">
-        <a href="#summary" class="nav-link"><i class="fa-solid fa-microchip"></i> <span>Overview</span></a>
-        <a href="#experience" class="nav-link"><i class="fa-solid fa-timeline"></i> <span>Experience</span></a>
-        <a href="#skills" class="nav-link"><i class="fa-solid fa-network-wired"></i> <span>Skills</span></a>
-        <a href="#innovations" class="nav-link"><i class="fa-solid fa-brain"></i> <span>Innovations</span></a>
-        <a href="#terminal-section" class="nav-link"><i class="fa-solid fa-terminal"></i> <span>Terminal</span></a>
-        <a href="#contact" class="nav-link"><i class="fa-solid fa-satellite-dish"></i> <span>Contact</span></a>
+        <a href="#summary" class="nav-link magnetic-target"><i class="fa-solid fa-microchip"></i> <span>Overview</span></a>
+        <a href="#experience" class="nav-link magnetic-target"><i class="fa-solid fa-timeline"></i> <span>Experience</span></a>
+        <a href="#skills" class="nav-link magnetic-target"><i class="fa-solid fa-network-wired"></i> <span>Skills</span></a>
+        <a href="#innovations" class="nav-link magnetic-target"><i class="fa-solid fa-brain"></i> <span>Innovations</span></a>
+        <a href="#terminal-section" class="nav-link magnetic-target"><i class="fa-solid fa-terminal"></i> <span>Terminal</span></a>
+        <a href="#contact" class="nav-link magnetic-target"><i class="fa-solid fa-satellite-dish"></i> <span>Contact</span></a>
       </nav>
 
       <div class="hud-controls">
         <!-- Theme Selector -->
         <div class="theme-dropdown" title="Change Theme Accent">
-          <button class="hud-btn-icon" id="themeToggleBtn" aria-label="Toggle Cyber Theme">
+          <button class="hud-btn-icon magnetic-target" id="themeToggleBtn" aria-label="Toggle Cyber Theme">
             <i class="fa-solid fa-palette"></i>
           </button>
           <div class="theme-menu" id="themeMenu">
@@ -55,12 +65,12 @@
         </div>
 
         <!-- Audio FX Toggle -->
-        <button class="hud-btn-icon" id="audioToggleBtn" title="Toggle Futuristic Sci-Fi Audio FX" aria-label="Toggle Audio">
+        <button class="hud-btn-icon magnetic-target" id="audioToggleBtn" title="Toggle Futuristic Sci-Fi Audio FX" aria-label="Toggle Audio">
           <i class="fa-solid fa-volume-high" id="audioIcon"></i>
         </button>
 
         <!-- Print / PDF Resume -->
-        <button class="hud-btn-dossier" id="printResumeBtn" title="Print / Export Clean Resume PDF">
+        <button class="hud-btn-dossier magnetic-target" id="printResumeBtn" title="Print / Export Clean Resume PDF">
           <i class="fa-solid fa-file-pdf"></i>
           <span>EXPORT RESUME</span>
         </button>
@@ -73,13 +83,40 @@
     </div>
   </header>
 
+  <!-- INFINITE KINETIC MARQUEE TICKER -->
+  <div class="kinetic-ticker-wrap">
+    <div class="kinetic-ticker">
+      <div class="ticker-content">
+        <span>DATA ANALYTICS</span> <span class="t-sep">✦</span>
+        <span>REVOPS AUTOMATION</span> <span class="t-sep">✦</span>
+        <span>RAPIDFUZZ &amp; MACHINE LEARNING</span> <span class="t-sep">✦</span>
+        <span>POWER BI &amp; ADVANCED DAX</span> <span class="t-sep">✦</span>
+        <span>85% EFFORT REDUCTION</span> <span class="t-sep">✦</span>
+        <span>500K+ RECORDS RESOLUTION</span> <span class="t-sep">✦</span>
+        <span>SALESFORCE CRM ARCHITECTURE</span> <span class="t-sep">✦</span>
+        <span>LLM PIPELINE SYNTHESIS</span> <span class="t-sep">✦</span>
+      </div>
+      <div class="ticker-content" aria-hidden="true">
+        <span>DATA ANALYTICS</span> <span class="t-sep">✦</span>
+        <span>REVOPS AUTOMATION</span> <span class="t-sep">✦</span>
+        <span>RAPIDFUZZ &amp; MACHINE LEARNING</span> <span class="t-sep">✦</span>
+        <span>POWER BI &amp; ADVANCED DAX</span> <span class="t-sep">✦</span>
+        <span>85% EFFORT REDUCTION</span> <span class="t-sep">✦</span>
+        <span>500K+ RECORDS RESOLUTION</span> <span class="t-sep">✦</span>
+        <span>SALESFORCE CRM ARCHITECTURE</span> <span class="t-sep">✦</span>
+        <span>LLM PIPELINE SYNTHESIS</span> <span class="t-sep">✦</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Main Content Stream -->
   <main class="main-content">
 
-    <!-- HERO / HUD STATUS SECTION -->
+    <!-- HERO / HUD STATUS SECTION WITH 3D INTERACTIVE HOLOGRAM -->
     <section class="section hero-section" id="hero">
       <div class="container">
-        <div class="hero-hud-frame">
+        <div class="hero-hud-frame beam-card" data-tilt>
+          <div class="beam-border"></div>
           <!-- Corner brackets -->
           <span class="corner tl"></span>
           <span class="corner tr"></span>
@@ -90,7 +127,7 @@
             <div class="status-chip"><span class="dot-green"></span> SYSTEM ONLINE</div>
             <div class="status-chip"><i class="fa-solid fa-location-crosshairs"></i> RAJSAMAND, RAJASTHAN, INDIA</div>
             <div class="status-chip"><i class="fa-solid fa-shield-halved"></i> 9+ YEARS DOMAIN EXPERIENCE</div>
-            <div class="status-chip mode-chip">MODE: US HEALTHCARE-TECH SAAS & REVOPS</div>
+            <div class="status-chip mode-chip">MODE: US HEALTHCARE-TECH SAAS &amp; REVOPS</div>
           </div>
 
           <div class="hero-body">
@@ -112,41 +149,39 @@
               </p>
 
               <div class="hero-cta-group">
-                <a href="#innovations" class="cyber-btn primary">
+                <a href="#innovations" class="cyber-btn primary magnetic-target">
                   <span class="btn-glitch"></span>
                   <i class="fa-solid fa-bolt"></i> EXPLORE INNOVATIONS
                 </a>
-                <a href="#contact" class="cyber-btn secondary">
+                <a href="#contact" class="cyber-btn secondary magnetic-target">
                   <i class="fa-solid fa-satellite-dish"></i> TRANSMIT SIGNAL
                 </a>
-                <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="cyber-btn outline">
+                <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="cyber-btn outline magnetic-target">
                   <i class="fa-brands fa-linkedin"></i> LINKEDIN DOSSIER
                 </a>
               </div>
             </div>
 
-            <!-- Interactive Identity Core / Telemetry -->
+            <!-- Interactive 3D Holographic Core & Telemetry -->
             <div class="hero-hud-core">
-              <div class="cyber-avatar-hex">
-                <div class="hex-outer-ring"></div>
-                <div class="hex-inner-matrix">
-                  <i class="fa-solid fa-chart-network core-icon"></i>
-                  <span class="hex-initials">DM</span>
+              <div class="hologram-3d-wrapper" id="hologramContainer" title="Drag to rotate 3D Data Core">
+                <canvas id="hologramCanvas"></canvas>
+                <div class="hologram-label-ring">
+                  <span>3D NEURAL DATA CORE</span>
                 </div>
-                <div class="hex-orbit-dot orbit-1"></div>
-                <div class="hex-orbit-dot orbit-2"></div>
+                <div class="hologram-hint"><i class="fa-solid fa-arrows-up-down-left-right"></i> DRAG TO ORBIT</div>
               </div>
 
-              <div class="quick-telemetry-box">
+              <div class="quick-telemetry-box spotlight-card" data-tilt>
                 <div class="telemetry-item">
                   <span class="tel-label">CONTACT EMAIL</span>
-                  <a href="mailto:dinesh.malvey@hotmail.com" class="tel-val copy-trigger" data-copy="dinesh.malvey@hotmail.com">
+                  <a href="mailto:dinesh.malvey@hotmail.com" class="tel-val copy-trigger magnetic-target" data-copy="dinesh.malvey@hotmail.com">
                     dinesh.malvey@hotmail.com <i class="fa-regular fa-copy"></i>
                   </a>
                 </div>
                 <div class="telemetry-item">
                   <span class="tel-label">DIRECT PHONE</span>
-                  <a href="tel:+918055111164" class="tel-val copy-trigger" data-copy="8055111164">
+                  <a href="tel:+918055111164" class="tel-val copy-trigger magnetic-target" data-copy="8055111164">
                     +91 8055111164 <i class="fa-regular fa-copy"></i>
                   </a>
                 </div>
@@ -158,27 +193,27 @@
             </div>
           </div>
 
-          <!-- KEY METRICS TELEMETRY GRID -->
+          <!-- KEY METRICS TELEMETRY GRID WITH 3D TILT & SPOTLIGHT -->
           <div class="telemetry-stats-grid">
-            <div class="stat-card">
+            <div class="stat-card spotlight-card" data-tilt>
               <div class="stat-header">
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 <span class="stat-tag">DOMAIN TENURE</span>
               </div>
               <div class="stat-number" data-target="9">9<span>+</span></div>
-              <div class="stat-desc">Years in Data Analytics & BI Operations</div>
+              <div class="stat-desc">Years in Data Analytics &amp; BI Operations</div>
             </div>
 
-            <div class="stat-card highlight">
+            <div class="stat-card highlight spotlight-card" data-tilt>
               <div class="stat-header">
                 <i class="fa-solid fa-gauge-high"></i>
                 <span class="stat-tag">EFFORT REDUCTION</span>
               </div>
               <div class="stat-number" data-target="85">85<span>%</span></div>
-              <div class="stat-desc">Manual Reporting Effort Eliminated via Python & Automation</div>
+              <div class="stat-desc">Manual Reporting Effort Eliminated via Python &amp; Automation</div>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card spotlight-card" data-tilt>
               <div class="stat-header">
                 <i class="fa-solid fa-bullseye"></i>
                 <span class="stat-tag">MATCH ACCURACY</span>
@@ -187,7 +222,7 @@
               <div class="stat-desc">Achieved in Account Deduplication (Up from 5–10%)</div>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card spotlight-card" data-tilt>
               <div class="stat-header">
                 <i class="fa-solid fa-database"></i>
                 <span class="stat-tag">RECORDS QUERY SPEED</span>
@@ -196,16 +231,16 @@
               <div class="stat-desc">Salesforce Records Queried in &lt; 5 Mins (from 2 Hours)</div>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card spotlight-card" data-tilt>
               <div class="stat-header">
                 <i class="fa-solid fa-chart-pie"></i>
                 <span class="stat-tag">EXECUTIVE BI</span>
               </div>
               <div class="stat-number" data-target="20">20<span>+</span></div>
-              <div class="stat-desc">Power BI Enterprise Dashboards Built & Deployed</div>
+              <div class="stat-desc">Power BI Enterprise Dashboards Built &amp; Deployed</div>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card spotlight-card" data-tilt>
               <div class="stat-header">
                 <i class="fa-solid fa-calendar-check"></i>
                 <span class="stat-tag">TIME SAVED</span>
@@ -228,24 +263,24 @@
         </div>
 
         <div class="innovation-tabs-nav">
-          <button class="inno-tab active" data-tab="tab-matcher">
+          <button class="inno-tab active magnetic-target" data-tab="tab-matcher">
             <i class="fa-solid fa-code-compare"></i>
             <span>Account Matcher App</span>
             <small>RapidFuzz + ML Embeddings</small>
           </button>
-          <button class="inno-tab" data-tab="tab-contact">
+          <button class="inno-tab magnetic-target" data-tab="tab-contact">
             <i class="fa-solid fa-address-book"></i>
             <span>500k+ Contact Search</span>
             <small>Desktop SQL / Lightning Search</small>
           </button>
-          <button class="inno-tab" data-tab="tab-enrichment">
+          <button class="inno-tab magnetic-target" data-tab="tab-enrichment">
             <i class="fa-solid fa-robot"></i>
             <span>AI Account Enrichment</span>
             <small>Python + LLM APIs + ZoomInfo</small>
           </button>
-          <button class="inno-tab" data-tab="tab-powerbi">
+          <button class="inno-tab magnetic-target" data-tab="tab-powerbi">
             <i class="fa-solid fa-chart-line"></i>
-            <span>Executive BI & DAX</span>
+            <span>Executive BI &amp; DAX</span>
             <small>20+ Power BI Dashboards</small>
           </button>
         </div>
@@ -253,7 +288,7 @@
         <!-- TAB 1: ACCOUNT MATCHER APP -->
         <div class="inno-tab-content active" id="tab-matcher">
           <div class="inno-grid">
-            <div class="inno-info-panel">
+            <div class="inno-info-panel spotlight-card" data-tilt>
               <div class="inno-tag">FLAGSHIP APPLICATION // PYSIDE6 &amp; RAPIDFUZZ</div>
               <h3 class="inno-title">Account Matcher &amp; Duplicate Finder Desktop App</h3>
               <p class="inno-text">
@@ -284,7 +319,8 @@
             </div>
 
             <!-- LIVE SIMULATOR WIDGET -->
-            <div class="inno-interactive-panel">
+            <div class="inno-interactive-panel spotlight-card beam-card" data-tilt>
+              <div class="beam-border"></div>
               <div class="hud-panel-header">
                 <span class="panel-dot"></span>
                 <span>INTERACTIVE MATCHER SIMULATOR</span>
@@ -296,13 +332,13 @@
                 <div class="sim-input-group">
                   <label>Sample Incoming Dirty String:</label>
                   <div class="sample-chips" id="matcherSamples">
-                    <button class="chip-btn" data-input="Phreesia Healthcare Tech LLC" data-master="Phreesia Inc.">Phreesia Healthcare Tech LLC</button>
-                    <button class="chip-btn" data-input="Rayden Design Studios Pvt" data-master="Rayden Design Studio Pvt Ltd">Rayden Design Studios Pvt</button>
-                    <button class="chip-btn" data-input="WNS Global Svcs Pune" data-master="WNS Global Services">WNS Global Svcs Pune</button>
+                    <button class="chip-btn magnetic-target" data-input="Phreesia Healthcare Tech LLC" data-master="Phreesia Inc.">Phreesia Healthcare Tech LLC</button>
+                    <button class="chip-btn magnetic-target" data-input="Rayden Design Studios Pvt" data-master="Rayden Design Studio Pvt Ltd">Rayden Design Studios Pvt</button>
+                    <button class="chip-btn magnetic-target" data-input="WNS Global Svcs Pune" data-master="WNS Global Services">WNS Global Svcs Pune</button>
                   </div>
                   <div class="input-with-button">
                     <input type="text" id="matcherInput" value="Phreesia Healthcare Tech LLC" placeholder="Enter messy account name...">
-                    <button class="cyber-btn sm" id="runMatchBtn"><i class="fa-solid fa-play"></i> EVALUATE</button>
+                    <button class="cyber-btn sm magnetic-target" id="runMatchBtn"><i class="fa-solid fa-play"></i> EVALUATE</button>
                   </div>
                 </div>
 
@@ -335,7 +371,7 @@
         <!-- TAB 2: 500k+ CONTACT MATCHER -->
         <div class="inno-tab-content" id="tab-contact">
           <div class="inno-grid">
-            <div class="inno-info-panel">
+            <div class="inno-info-panel spotlight-card" data-tilt>
               <div class="inno-tag">DATABASE UTILITY // SUB-5 MINUTE LOOKUP</div>
               <h3 class="inno-title">500,000+ Salesforce Contact Lightning Search Engine</h3>
               <p class="inno-text">
@@ -354,7 +390,7 @@
               </div>
             </div>
 
-            <div class="inno-interactive-panel benchmark-panel">
+            <div class="inno-interactive-panel benchmark-panel spotlight-card" data-tilt>
               <div class="hud-panel-header">
                 <span class="panel-dot"></span>
                 <span>LOOKUP TIME BENCHMARK COMPARISON</span>
@@ -391,7 +427,7 @@
         <!-- TAB 3: AI ACCOUNT ENRICHMENT -->
         <div class="inno-tab-content" id="tab-enrichment">
           <div class="inno-grid">
-            <div class="inno-info-panel">
+            <div class="inno-info-panel spotlight-card" data-tilt>
               <div class="inno-tag">GENERATIVE AI &amp; REVOPS PIPELINE</div>
               <h3 class="inno-title">Autonomous Salesforce Account Enrichment Pipeline</h3>
               <p class="inno-text">
@@ -406,7 +442,7 @@
               </div>
             </div>
 
-            <div class="inno-interactive-panel">
+            <div class="inno-interactive-panel spotlight-card" data-tilt>
               <div class="hud-panel-header">
                 <span class="panel-dot"></span>
                 <span>PIPELINE ARCHITECTURE TELEMETRY</span>
@@ -448,7 +484,7 @@
         <!-- TAB 4: EXECUTIVE BI & POWER BI -->
         <div class="inno-tab-content" id="tab-powerbi">
           <div class="inno-grid">
-            <div class="inno-info-panel">
+            <div class="inno-info-panel spotlight-card" data-tilt>
               <div class="inno-tag">EXECUTIVE INTELLIGENCE // 20+ DASHBOARDS</div>
               <h3 class="inno-title">Power BI Enterprise Reporting &amp; Revenue Analytics Hub</h3>
               <p class="inno-text">
@@ -469,17 +505,17 @@
               </div>
             </div>
 
-            <div class="inno-interactive-panel">
+            <div class="inno-interactive-panel spotlight-card" data-tilt>
               <div class="hud-panel-header">
                 <span class="panel-dot"></span>
                 <span>INTERACTIVE KPI METRIC CONTROLLER</span>
               </div>
               <div class="kpi-interactive-display">
                 <div class="kpi-switch-buttons" id="kpiButtons">
-                  <button class="kpi-btn active" data-metric="roi">Marketing ROI</button>
-                  <button class="kpi-btn" data-metric="cpl">Cost Per Lead (CPL)</button>
-                  <button class="kpi-btn" data-metric="cac">Customer Acquisition (CAC)</button>
-                  <button class="kpi-btn" data-metric="tradeshow">Trade Show Recovery</button>
+                  <button class="kpi-btn active magnetic-target" data-metric="roi">Marketing ROI</button>
+                  <button class="kpi-btn magnetic-target" data-metric="cpl">Cost Per Lead (CPL)</button>
+                  <button class="kpi-btn magnetic-target" data-metric="cac">Customer Acquisition (CAC)</button>
+                  <button class="kpi-btn magnetic-target" data-metric="tradeshow">Trade Show Recovery</button>
                 </div>
                 <div class="kpi-screen" id="kpiScreen">
                   <div class="kpi-big-value" id="kpiValue">4.8x ROI</div>
@@ -506,8 +542,8 @@
         <div class="experience-timeline">
 
           <!-- ROLE 1: PHREESIA INDIA -->
-          <div class="timeline-card current-role">
-            <div class="card-hud-border"></div>
+          <div class="timeline-card current-role spotlight-card beam-card" data-tilt>
+            <div class="beam-border"></div>
             <div class="timeline-node">
               <div class="node-pulse"></div>
             </div>
@@ -575,8 +611,7 @@
           </div>
 
           <!-- ROLE 2: RAYDEN DESIGN STUDIO -->
-          <div class="timeline-card">
-            <div class="card-hud-border"></div>
+          <div class="timeline-card spotlight-card" data-tilt>
             <div class="timeline-node"></div>
             
             <div class="card-header">
@@ -629,8 +664,7 @@
           </div>
 
           <!-- ROLE 3: WNS GLOBAL SERVICES -->
-          <div class="timeline-card">
-            <div class="card-hud-border"></div>
+          <div class="timeline-card spotlight-card" data-tilt>
             <div class="timeline-node"></div>
             
             <div class="card-header">
@@ -682,8 +716,7 @@
           </div>
 
           <!-- ROLE 4: CAPITA -->
-          <div class="timeline-card">
-            <div class="card-hud-border"></div>
+          <div class="timeline-card spotlight-card" data-tilt>
             <div class="timeline-node"></div>
             
             <div class="card-header">
@@ -735,19 +768,19 @@
         </div>
 
         <div class="skills-filter-nav">
-          <button class="skill-filter-btn active" data-filter="all">All Disciplines</button>
-          <button class="skill-filter-btn" data-filter="prog">Programming &amp; Automation</button>
-          <button class="skill-filter-btn" data-filter="bi">BI &amp; Visualization</button>
-          <button class="skill-filter-btn" data-filter="crm">CRM &amp; Governance</button>
-          <button class="skill-filter-btn" data-filter="ml">Data Matching &amp; ML</button>
-          <button class="skill-filter-btn" data-filter="sales">Sales &amp; Research Tools</button>
-          <button class="skill-filter-btn" data-filter="cloud">Cloud</button>
+          <button class="skill-filter-btn active magnetic-target" data-filter="all">All Disciplines</button>
+          <button class="skill-filter-btn magnetic-target" data-filter="prog">Programming &amp; Automation</button>
+          <button class="skill-filter-btn magnetic-target" data-filter="bi">BI &amp; Visualization</button>
+          <button class="skill-filter-btn magnetic-target" data-filter="crm">CRM &amp; Governance</button>
+          <button class="skill-filter-btn magnetic-target" data-filter="ml">Data Matching &amp; ML</button>
+          <button class="skill-filter-btn magnetic-target" data-filter="sales">Sales &amp; Research Tools</button>
+          <button class="skill-filter-btn magnetic-target" data-filter="cloud">Cloud</button>
         </div>
 
         <div class="skills-grid" id="skillsGrid">
 
           <!-- PROGRAMMING & AUTOMATION -->
-          <div class="skill-card" data-category="prog">
+          <div class="skill-card spotlight-card" data-category="prog" data-tilt>
             <div class="skill-card-top">
               <i class="fa-brands fa-python skill-icon"></i>
               <div class="skill-title-grp">
@@ -762,7 +795,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="prog">
+          <div class="skill-card spotlight-card" data-category="prog" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-database skill-icon"></i>
               <div class="skill-title-grp">
@@ -777,7 +810,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="prog">
+          <div class="skill-card spotlight-card" data-category="prog" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-gears skill-icon"></i>
               <div class="skill-title-grp">
@@ -793,7 +826,7 @@
           </div>
 
           <!-- BI & VISUALIZATION -->
-          <div class="skill-card" data-category="bi">
+          <div class="skill-card spotlight-card" data-category="bi" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-chart-simple skill-icon"></i>
               <div class="skill-title-grp">
@@ -808,7 +841,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="bi">
+          <div class="skill-card spotlight-card" data-category="bi" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-diagram-project skill-icon"></i>
               <div class="skill-title-grp">
@@ -823,7 +856,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="bi">
+          <div class="skill-card spotlight-card" data-category="bi" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-chart-pie skill-icon"></i>
               <div class="skill-title-grp">
@@ -839,7 +872,7 @@
           </div>
 
           <!-- CRM & DATA MANAGEMENT -->
-          <div class="skill-card" data-category="crm">
+          <div class="skill-card spotlight-card" data-category="crm" data-tilt>
             <div class="skill-card-top">
               <i class="fa-brands fa-salesforce skill-icon"></i>
               <div class="skill-title-grp">
@@ -854,7 +887,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="crm">
+          <div class="skill-card spotlight-card" data-category="crm" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-shield-virus skill-icon"></i>
               <div class="skill-title-grp">
@@ -870,7 +903,7 @@
           </div>
 
           <!-- DATA MATCHING & APPLIED ML -->
-          <div class="skill-card" data-category="ml">
+          <div class="skill-card spotlight-card" data-category="ml" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-code-merge skill-icon"></i>
               <div class="skill-title-grp">
@@ -885,7 +918,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="ml">
+          <div class="skill-card spotlight-card" data-category="ml" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-brain skill-icon"></i>
               <div class="skill-title-grp">
@@ -900,7 +933,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="ml">
+          <div class="skill-card spotlight-card" data-category="ml" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-wand-magic-sparkles skill-icon"></i>
               <div class="skill-title-grp">
@@ -916,7 +949,7 @@
           </div>
 
           <!-- MARKETING & SALES RESEARCH TOOLS -->
-          <div class="skill-card" data-category="sales">
+          <div class="skill-card spotlight-card" data-category="sales" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-magnifying-glass-chart skill-icon"></i>
               <div class="skill-title-grp">
@@ -931,7 +964,7 @@
             </div>
           </div>
 
-          <div class="skill-card" data-category="sales">
+          <div class="skill-card spotlight-card" data-category="sales" data-tilt>
             <div class="skill-card-top">
               <i class="fa-solid fa-chess-knight skill-icon"></i>
               <div class="skill-title-grp">
@@ -947,7 +980,7 @@
           </div>
 
           <!-- CLOUD PLATFORMS -->
-          <div class="skill-card" data-category="cloud">
+          <div class="skill-card spotlight-card" data-category="cloud" data-tilt>
             <div class="skill-card-top">
               <i class="fa-brands fa-microsoft skill-icon"></i>
               <div class="skill-title-grp">
@@ -975,7 +1008,8 @@
           <p class="section-subtitle">Interact with Dinesh Malvey's profile directly through a futuristic simulated cyber terminal.</p>
         </div>
 
-        <div class="terminal-window">
+        <div class="terminal-window spotlight-card beam-card" data-tilt>
+          <div class="beam-border"></div>
           <div class="terminal-titlebar">
             <div class="terminal-dots">
               <span class="tdot red"></span>
@@ -995,19 +1029,19 @@
 
           <div class="terminal-quick-chips">
             <span class="quick-label">QUICK COMMANDS:</span>
-            <button class="t-chip" data-cmd="help">help</button>
-            <button class="t-chip" data-cmd="summary">summary</button>
-            <button class="t-chip" data-cmd="skills">skills</button>
-            <button class="t-chip" data-cmd="experience">experience</button>
-            <button class="t-chip" data-cmd="impact">impact</button>
-            <button class="t-chip" data-cmd="contact">contact</button>
-            <button class="t-chip" data-cmd="clear">clear</button>
+            <button class="t-chip magnetic-target" data-cmd="help">help</button>
+            <button class="t-chip magnetic-target" data-cmd="summary">summary</button>
+            <button class="t-chip magnetic-target" data-cmd="skills">skills</button>
+            <button class="t-chip magnetic-target" data-cmd="experience">experience</button>
+            <button class="t-chip magnetic-target" data-cmd="impact">impact</button>
+            <button class="t-chip magnetic-target" data-cmd="contact">contact</button>
+            <button class="t-chip magnetic-target" data-cmd="clear">clear</button>
           </div>
 
           <form class="terminal-input-row" id="terminalForm">
             <span class="terminal-prompt">user@antigravity:~$</span>
             <input type="text" id="terminalInput" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g., 'help', 'skills', 'experience')...">
-            <button type="submit" class="term-exec-btn"><i class="fa-solid fa-angles-right"></i></button>
+            <button type="submit" class="term-exec-btn magnetic-target"><i class="fa-solid fa-angles-right"></i></button>
           </form>
         </div>
       </div>
@@ -1023,7 +1057,7 @@
 
         <div class="edu-lang-grid">
           <!-- EDUCATION CARD -->
-          <div class="edu-card">
+          <div class="edu-card spotlight-card" data-tilt>
             <div class="edu-card-header">
               <div class="edu-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
               <div class="edu-title-grp">
@@ -1040,7 +1074,7 @@
           </div>
 
           <!-- LANGUAGES CARD -->
-          <div class="lang-card">
+          <div class="lang-card spotlight-card" data-tilt>
             <div class="lang-card-header">
               <div class="edu-icon-wrap"><i class="fa-solid fa-language"></i></div>
               <div class="edu-title-grp">
@@ -1089,7 +1123,8 @@
           <p class="section-subtitle">Open for high-impact Senior Data Analyst, Analytics Engineering, and BI leadership opportunities.</p>
         </div>
 
-        <div class="contact-hud-frame">
+        <div class="contact-hud-frame spotlight-card beam-card" data-tilt>
+          <div class="beam-border"></div>
           <div class="contact-grid">
 
             <!-- CONTACT DETAILS -->
@@ -1098,40 +1133,40 @@
               <p class="c-deck-sub">Direct access to Dinesh Malvey for recruiting, consultation, or technical collaborations.</p>
 
               <div class="comms-list">
-                <div class="comms-item">
+                <div class="comms-item spotlight-card">
                   <div class="comms-icon"><i class="fa-solid fa-envelope"></i></div>
                   <div class="comms-details">
                     <span class="comms-label">ELECTRONIC MAIL</span>
                     <a href="mailto:dinesh.malvey@hotmail.com" class="comms-value">dinesh.malvey@hotmail.com</a>
                   </div>
-                  <button class="copy-comms-btn copy-trigger" data-copy="dinesh.malvey@hotmail.com" title="Copy Email">
+                  <button class="copy-comms-btn copy-trigger magnetic-target" data-copy="dinesh.malvey@hotmail.com" title="Copy Email">
                     <i class="fa-regular fa-copy"></i>
                   </button>
                 </div>
 
-                <div class="comms-item">
+                <div class="comms-item spotlight-card">
                   <div class="comms-icon"><i class="fa-solid fa-phone"></i></div>
                   <div class="comms-details">
                     <span class="comms-label">VOICE / CELLULAR</span>
                     <a href="tel:+918055111164" class="comms-value">+91 8055111164</a>
                   </div>
-                  <button class="copy-comms-btn copy-trigger" data-copy="8055111164" title="Copy Phone">
+                  <button class="copy-comms-btn copy-trigger magnetic-target" data-copy="8055111164" title="Copy Phone">
                     <i class="fa-regular fa-copy"></i>
                   </button>
                 </div>
 
-                <div class="comms-item">
+                <div class="comms-item spotlight-card">
                   <div class="comms-icon"><i class="fa-brands fa-linkedin-in"></i></div>
                   <div class="comms-details">
                     <span class="comms-label">LINKEDIN NETWORK</span>
                     <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="comms-value">linkedin.com/in/dineshmalvey</a>
                   </div>
-                  <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="copy-comms-btn" title="Open LinkedIn Profile">
+                  <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="copy-comms-btn magnetic-target" title="Open LinkedIn Profile">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </a>
                 </div>
 
-                <div class="comms-item">
+                <div class="comms-item spotlight-card">
                   <div class="comms-icon"><i class="fa-solid fa-location-dot"></i></div>
                   <div class="comms-details">
                     <span class="comms-label">BASE LOCATION</span>
@@ -1143,7 +1178,7 @@
             </div>
 
             <!-- TRANSMISSION FORM SIMULATOR -->
-            <div class="contact-form-panel">
+            <div class="contact-form-panel spotlight-card">
               <div class="hud-panel-header">
                 <span class="panel-dot"></span>
                 <span>TRANSMISSION PACKET DISPATCHER</span>
@@ -1170,7 +1205,7 @@
                   <textarea id="msgBody" rows="4" required placeholder="Type your message or project specs here..."></textarea>
                 </div>
 
-                <button type="submit" class="cyber-btn primary full-width" id="dispatchBtn">
+                <button type="submit" class="cyber-btn primary full-width magnetic-target" id="dispatchBtn">
                   <i class="fa-solid fa-paper-plane"></i> TRANSMIT VIA EMAIL CLIENT
                 </button>
               </form>
@@ -1293,13 +1328,13 @@
     <div class="container footer-container">
       <div class="footer-left">
         <span class="ft-logo">DINESH MALVEY</span>
-        <span class="ft-sub">// PORTFOLIO OS v3.8 • GITHUB PAGES READY</span>
+        <span class="ft-sub">// 3D WEBGL PORTFOLIO • LUSION-INSPIRED PHYSICS &amp; ANIMATION</span>
       </div>
       <div class="footer-center">
         <span class="live-clock" id="liveClock">UTC+05:30 // 00:00:00</span>
       </div>
       <div class="footer-right">
-        <a href="#hero" class="back-to-top" id="backToTop"><i class="fa-solid fa-chevron-up"></i> TOP</a>
+        <a href="#hero" class="back-to-top magnetic-target" id="backToTop"><i class="fa-solid fa-chevron-up"></i> TOP</a>
       </div>
     </div>
   </footer>
