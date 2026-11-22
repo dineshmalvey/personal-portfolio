@@ -65,11 +65,11 @@
           <i class="fa-solid fa-volume-high" id="audioIcon"></i>
         </button>
 
-        <!-- Print / PDF Resume -->
-        <button class="hud-btn-dossier magnetic-target" id="printResumeBtn" title="Print / Export Clean Resume PDF">
-          <i class="fa-solid fa-file-pdf"></i>
-          <span>EXPORT RESUME</span>
-        </button>
+        <!-- Download Official PDF Resume -->
+        <a href="DineshMalvey_SeniorAnalyst.pdf" download="DineshMalvey_SeniorAnalyst.pdf" class="hud-btn-dossier" id="exportResumeBtn" title="Download DineshMalvey_SeniorAnalyst.pdf" target="_blank">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>DOWNLOAD RESUME</span>
+        </a>
 
         <!-- Mobile Menu Toggle -->
         <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Open Mobile Menu">
@@ -145,15 +145,17 @@
               </p>
 
               <div class="hero-cta-group">
-                <a href="#innovations" class="cyber-btn primary magnetic-target">
-                  <span class="btn-glitch"></span>
+                <a href="DineshMalvey_SeniorAnalyst.pdf" download="DineshMalvey_SeniorAnalyst.pdf" class="cyber-btn primary" target="_blank" id="heroDownloadBtn">
+                  <i class="fa-solid fa-file-arrow-down"></i> DOWNLOAD RESUME (PDF)
+                </a>
+                <a href="#innovations" class="cyber-btn secondary">
                   <i class="fa-solid fa-bolt"></i> EXPLORE INNOVATIONS
                 </a>
-                <a href="#contact" class="cyber-btn secondary magnetic-target">
+                <a href="#contact" class="cyber-btn outline">
                   <i class="fa-solid fa-satellite-dish"></i> TRANSMIT SIGNAL
                 </a>
-                <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="cyber-btn outline magnetic-target">
-                  <i class="fa-brands fa-linkedin"></i> LINKEDIN DOSSIER
+                <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="cyber-btn outline">
+                  <i class="fa-brands fa-linkedin"></i> LINKEDIN
                 </a>
               </div>
             </div>
@@ -1025,13 +1027,14 @@
 
           <div class="terminal-quick-chips">
             <span class="quick-label">QUICK COMMANDS:</span>
-            <button class="t-chip magnetic-target" data-cmd="help">help</button>
-            <button class="t-chip magnetic-target" data-cmd="summary">summary</button>
-            <button class="t-chip magnetic-target" data-cmd="skills">skills</button>
-            <button class="t-chip magnetic-target" data-cmd="experience">experience</button>
-            <button class="t-chip magnetic-target" data-cmd="impact">impact</button>
-            <button class="t-chip magnetic-target" data-cmd="contact">contact</button>
-            <button class="t-chip magnetic-target" data-cmd="clear">clear</button>
+            <button class="t-chip" data-cmd="help">help</button>
+            <button class="t-chip" data-cmd="download">download</button>
+            <button class="t-chip" data-cmd="summary">summary</button>
+            <button class="t-chip" data-cmd="skills">skills</button>
+            <button class="t-chip" data-cmd="experience">experience</button>
+            <button class="t-chip" data-cmd="impact">impact</button>
+            <button class="t-chip" data-cmd="contact">contact</button>
+            <button class="t-chip" data-cmd="clear">clear</button>
           </div>
 
           <form class="terminal-input-row" id="terminalForm">

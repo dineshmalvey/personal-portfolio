@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeEngine();
   initCopyTriggers();
   initLiveClock();
-  initPrintHandler();
+  initResumeDownloadHandler();
   initMobileNav();
 });
 
@@ -769,17 +769,21 @@ function initCyberTerminal() {
 
   const commandResponses = {
     help: `Available Command Packets:
-• <span class="highlight-cmd">summary</span>     - Display executive biography & background
-• <span class="highlight-cmd">skills</span>      - List core competencies & technical arsenal
-• <span class="highlight-cmd">experience</span>  - View chronological career timeline & companies
-• <span class="highlight-cmd">innovations</span> - Inspect custom tools (Matcher App, AI enrichment)
-• <span class="highlight-cmd">impact</span>      - Quantitative operational metrics & wins
-• <span class="highlight-cmd">education</span>   - Academic credentials & university
-• <span class="highlight-cmd">languages</span>   - Multilingual communication capabilities
-• <span class="highlight-cmd">contact</span>     - Direct electronic mail, cellular & LinkedIn
-• <span class="highlight-cmd">theme &lt;name&gt;</span> - Set theme accent (cyan | purple | emerald)
-• <span class="highlight-cmd">matrix</span>      - Trigger Matrix digital cascade
-• <span class="highlight-cmd">clear</span>       - Wipe terminal buffer`,
+• <span class="highlight-cmd">download</span>   - Download official resume PDF (DineshMalvey_SeniorAnalyst.pdf)
+• <span class="highlight-cmd">summary</span>    - Display executive biography & background
+• <span class="highlight-cmd">skills</span>     - List core competencies & technical arsenal
+• <span class="highlight-cmd">experience</span> - View chronological career timeline & companies
+• <span class="highlight-cmd">innovations</span>- Inspect custom tools (Matcher App, AI enrichment)
+• <span class="highlight-cmd">impact</span>     - Quantitative operational metrics & wins
+• <span class="highlight-cmd">education</span>  - Academic credentials & university
+• <span class="highlight-cmd">languages</span>  - Multilingual communication capabilities
+• <span class="highlight-cmd">contact</span>    - Direct electronic mail, cellular & LinkedIn
+• <span class="highlight-cmd">theme &lt;name&gt;</span>- Set theme accent (cyan | purple | emerald)
+• <span class="highlight-cmd">matrix</span>     - Trigger Matrix digital cascade
+• <span class="highlight-cmd">clear</span>      - Wipe terminal buffer`,
+
+    download: `DISPATCHING DOSSIER PACKET:
+Fetching DineshMalvey_SeniorAnalyst.pdf... Download initiated successfully!`,
 
     summary: `EXECUTIVE SUMMARY:
 Senior Data Analyst with 9+ years experience in Business Intelligence, data analytics, CRM quality, and reporting automation (including 4+ years US healthcare-tech SaaS). Replaced legacy manual workflows with custom Python apps and automated reporting pipelines, eliminating 85% manual reporting effort and saving 4–5 days per data-matching cycle.`,
@@ -857,6 +861,20 @@ Foundation in quantitative economics, commercial statistics, and accounting.`,
       } else {
         appendTerminal(`ERROR: Unknown theme '${themeName}'. Valid options: cyan, purple, emerald.`);
       }
+      return;
+    }
+
+    if (cmd === 'download' || cmd === 'resume' || cmd === 'pdf') {
+      appendTerminal(`SYSTEM: Initiating secure transmission for <span class="highlight-cmd">DineshMalvey_SeniorAnalyst.pdf</span>...`);
+      const link = document.createElement('a');
+      link.href = 'DineshMalvey_SeniorAnalyst.pdf';
+      link.download = 'DineshMalvey_SeniorAnalyst.pdf';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('DOWNLOADING: DineshMalvey_SeniorAnalyst.pdf');
+      if (window.playCyberTone) window.playCyberTone('success');
       return;
     }
 
@@ -1017,18 +1035,22 @@ function initLiveClock() {
 }
 
 /* =====================================================================
-   17. PRINT / PDF EXPORT HANDLER
+   17. RESUME PDF DOWNLOAD HANDLER
    ===================================================================== */
-function initPrintHandler() {
-  const printBtn = document.getElementById('printResumeBtn');
-  if (printBtn) {
-    printBtn.addEventListener('click', () => {
-      showToast('PREPARING CLEAN RESUME DOSSIER...');
-      setTimeout(() => {
-        window.print();
-      }, 350);
-    });
-  }
+function initResumeDownloadHandler() {
+  const downloadBtns = [
+    document.getElementById('exportResumeBtn'),
+    document.getElementById('heroDownloadBtn')
+  ];
+
+  downloadBtns.forEach((btn) => {
+    if (btn) {
+      btn.addEventListener('click', () => {
+        showToast('DOWNLOADING: DineshMalvey_SeniorAnalyst.pdf');
+        if (window.playCyberTone) window.playCyberTone('success');
+      });
+    }
+  });
 }
 
 /* =====================================================================
