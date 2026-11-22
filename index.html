@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinesh Malvey // Senior Data Analyst & BI Specialist</title>
+  <meta name="description" content="Interactive futuristic portfolio & resume of Dinesh Malvey, Senior Data Analyst specializing in Business Intelligence, Applied ML, and Process Automation.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="cyan">
+  <!-- Moving Background Interactive Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="cyber-grid-overlay"></div>
+  <div class="scanline-overlay"></div>
+
+  <!-- Audio Synthesizer Notification / Status Bar -->
+  <header class="hud-header">
+    <div class="hud-container">
+      <div class="hud-brand">
+        <span class="hud-indicator pulse"></span>
+        <a href="#hero" class="brand-logo">DM<span class="accent-text">//01</span></a>
+        <span class="brand-tag">SENIOR_ANALYST.EXE</span>
+      </div>
+
+      <nav class="hud-nav" id="hudNav">
+        <a href="#summary" class="nav-link"><i class="fa-solid fa-microchip"></i> <span>Overview</span></a>
+        <a href="#experience" class="nav-link"><i class="fa-solid fa-timeline"></i> <span>Experience</span></a>
+        <a href="#skills" class="nav-link"><i class="fa-solid fa-network-wired"></i> <span>Skills</span></a>
+        <a href="#innovations" class="nav-link"><i class="fa-solid fa-brain"></i> <span>Innovations</span></a>
+        <a href="#terminal-section" class="nav-link"><i class="fa-solid fa-terminal"></i> <span>Terminal</span></a>
+        <a href="#contact" class="nav-link"><i class="fa-solid fa-satellite-dish"></i> <span>Contact</span></a>
+      </nav>
+
+      <div class="hud-controls">
+        <!-- Theme Selector -->
+        <div class="theme-dropdown" title="Change Theme Accent">
+          <button class="hud-btn-icon" id="themeToggleBtn" aria-label="Toggle Cyber Theme">
+            <i class="fa-solid fa-palette"></i>
+          </button>
+          <div class="theme-menu" id="themeMenu">
+            <button data-set-theme="cyan" class="theme-opt active"><span class="color-dot cyan"></span> Cyan Cyber</button>
+            <button data-set-theme="purple" class="theme-opt"><span class="color-dot purple"></span> Synth Violet</button>
+            <button data-set-theme="emerald" class="theme-opt"><span class="color-dot emerald"></span> Matrix Emerald</button>
+          </div>
+        </div>
+
+        <!-- Audio FX Toggle -->
+        <button class="hud-btn-icon" id="audioToggleBtn" title="Toggle Futuristic Sci-Fi Audio FX" aria-label="Toggle Audio">
+          <i class="fa-solid fa-volume-high" id="audioIcon"></i>
+        </button>
+
+        <!-- Print / PDF Resume -->
+        <button class="hud-btn-dossier" id="printResumeBtn" title="Print / Export Clean Resume PDF">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>EXPORT RESUME</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Open Mobile Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Stream -->
+  <main class="main-content">
+
+    <!-- HERO / HUD STATUS SECTION -->
+    <section class="section hero-section" id="hero">
+      <div class="container">
+        <div class="hero-hud-frame">
+          <!-- Corner brackets -->
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+
+          <div class="hero-status-bar">
+            <div class="status-chip"><span class="dot-green"></span> SYSTEM ONLINE</div>
+            <div class="status-chip"><i class="fa-solid fa-location-crosshairs"></i> RAJSAMAND, RAJASTHAN, INDIA</div>
+            <div class="status-chip"><i class="fa-solid fa-shield-halved"></i> 9+ YEARS DOMAIN EXPERIENCE</div>
+            <div class="status-chip mode-chip">MODE: US HEALTHCARE-TECH SAAS & REVOPS</div>
+          </div>
+
+          <div class="hero-body">
+            <div class="hero-text">
+              <div class="tag-row">
+                <span class="hud-subtag">// EXECUTIVE PROFILE IDENTIFIER</span>
+              </div>
+              <h1 class="hero-title" id="scrambleName" data-value="DINESH MALVEY">DINESH MALVEY</h1>
+              <h2 class="hero-subtitle">
+                <span class="typing-text" id="typingRole">Senior Data Analyst</span>
+                <span class="cursor">_</span>
+              </h2>
+              <p class="hero-domain">
+                Market Research <span class="sep">•</span> Business Intelligence <span class="sep">•</span> Process Automation
+              </p>
+              
+              <p class="hero-summary" id="summary">
+                Senior Data Analyst with <strong>9+ years of experience</strong> across data analytics, business intelligence (BI), CRM data quality, and reporting automation, including <strong>4+ years supporting US healthcare-tech SaaS marketing and sales operations</strong>. Hands-on across Power BI (DAX, Power Query), Python, SQL, and Salesforce CRM. Proven track record of replacing slow manual workflows and third-party tools with custom Python applications and automated pipelines—<strong>cutting manual reporting effort by 85%</strong> and <strong>saving 4–5 days per data-matching cycle</strong>.
+              </p>
+
+              <div class="hero-cta-group">
+                <a href="#innovations" class="cyber-btn primary">
+                  <span class="btn-glitch"></span>
+                  <i class="fa-solid fa-bolt"></i> EXPLORE INNOVATIONS
+                </a>
+                <a href="#contact" class="cyber-btn secondary">
+                  <i class="fa-solid fa-satellite-dish"></i> TRANSMIT SIGNAL
+                </a>
+                <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="cyber-btn outline">
+                  <i class="fa-brands fa-linkedin"></i> LINKEDIN DOSSIER
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Identity Core / Telemetry -->
+            <div class="hero-hud-core">
+              <div class="cyber-avatar-hex">
+                <div class="hex-outer-ring"></div>
+                <div class="hex-inner-matrix">
+                  <i class="fa-solid fa-chart-network core-icon"></i>
+                  <span class="hex-initials">DM</span>
+                </div>
+                <div class="hex-orbit-dot orbit-1"></div>
+                <div class="hex-orbit-dot orbit-2"></div>
+              </div>
+
+              <div class="quick-telemetry-box">
+                <div class="telemetry-item">
+                  <span class="tel-label">CONTACT EMAIL</span>
+                  <a href="mailto:dinesh.malvey@hotmail.com" class="tel-val copy-trigger" data-copy="dinesh.malvey@hotmail.com">
+                    dinesh.malvey@hotmail.com <i class="fa-regular fa-copy"></i>
+                  </a>
+                </div>
+                <div class="telemetry-item">
+                  <span class="tel-label">DIRECT PHONE</span>
+                  <a href="tel:+918055111164" class="tel-val copy-trigger" data-copy="8055111164">
+                    +91 8055111164 <i class="fa-regular fa-copy"></i>
+                  </a>
+                </div>
+                <div class="telemetry-item">
+                  <span class="tel-label">SECURITY CLEARANCE</span>
+                  <span class="tel-val glow">AUTHORIZATION LEVEL: SENIOR</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KEY METRICS TELEMETRY GRID -->
+          <div class="telemetry-stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span class="stat-tag">DOMAIN TENURE</span>
+              </div>
+              <div class="stat-number" data-target="9">9<span>+</span></div>
+              <div class="stat-desc">Years in Data Analytics & BI Operations</div>
+            </div>
+
+            <div class="stat-card highlight">
+              <div class="stat-header">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span class="stat-tag">EFFORT REDUCTION</span>
+              </div>
+              <div class="stat-number" data-target="85">85<span>%</span></div>
+              <div class="stat-desc">Manual Reporting Effort Eliminated via Python & Automation</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="fa-solid fa-bullseye"></i>
+                <span class="stat-tag">MATCH ACCURACY</span>
+              </div>
+              <div class="stat-number" data-target="70">70<span>%+</span></div>
+              <div class="stat-desc">Achieved in Account Deduplication (Up from 5–10%)</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="fa-solid fa-database"></i>
+                <span class="stat-tag">RECORDS QUERY SPEED</span>
+              </div>
+              <div class="stat-number">500<span>K+</span></div>
+              <div class="stat-desc">Salesforce Records Queried in &lt; 5 Mins (from 2 Hours)</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span class="stat-tag">EXECUTIVE BI</span>
+              </div>
+              <div class="stat-number" data-target="20">20<span>+</span></div>
+              <div class="stat-desc">Power BI Enterprise Dashboards Built & Deployed</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span class="stat-tag">TIME SAVED</span>
+              </div>
+              <div class="stat-number">4-5<span>d</span></div>
+              <div class="stat-desc">Per Matching Cycle for 1,000–1,500 Accounts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE INNOVATION SHOWCASE / LIVE DEMO LAB -->
+    <section class="section" id="innovations">
+      <div class="container">
+        <div class="section-title-wrap">
+          <div class="cyber-badge"><i class="fa-solid fa-flask"></i> APPLIED ENGINEERING HIGHLIGHTS</div>
+          <h2 class="section-title">ENGINEERED SOLUTIONS <span class="accent-text">&amp; APPLICATIONS</span></h2>
+          <p class="section-subtitle">Real custom tools built to eliminate manual friction, replace legacy tools, and deliver exponential velocity.</p>
+        </div>
+
+        <div class="innovation-tabs-nav">
+          <button class="inno-tab active" data-tab="tab-matcher">
+            <i class="fa-solid fa-code-compare"></i>
+            <span>Account Matcher App</span>
+            <small>RapidFuzz + ML Embeddings</small>
+          </button>
+          <button class="inno-tab" data-tab="tab-contact">
+            <i class="fa-solid fa-address-book"></i>
+            <span>500k+ Contact Search</span>
+            <small>Desktop SQL / Lightning Search</small>
+          </button>
+          <button class="inno-tab" data-tab="tab-enrichment">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI Account Enrichment</span>
+            <small>Python + LLM APIs + ZoomInfo</small>
+          </button>
+          <button class="inno-tab" data-tab="tab-powerbi">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Executive BI & DAX</span>
+            <small>20+ Power BI Dashboards</small>
+          </button>
+        </div>
+
+        <!-- TAB 1: ACCOUNT MATCHER APP -->
+        <div class="inno-tab-content active" id="tab-matcher">
+          <div class="inno-grid">
+            <div class="inno-info-panel">
+              <div class="inno-tag">FLAGSHIP APPLICATION // PYSIDE6 &amp; RAPIDFUZZ</div>
+              <h3 class="inno-title">Account Matcher &amp; Duplicate Finder Desktop App</h3>
+              <p class="inno-text">
+                Replaced Validity DemandTool by engineering a high-performance Python &amp; PySide6 desktop application combining fuzzy string matching (RapidFuzz) with machine learning (Gradient Boosting with sentence-transformer embeddings).
+              </p>
+              <div class="impact-metrics-row">
+                <div class="impact-chip">
+                  <span class="num">150,000+</span>
+                  <span class="lbl">Salesforce Master Records</span>
+                </div>
+                <div class="impact-chip highlight">
+                  <span class="num">5% → 70%+</span>
+                  <span class="lbl">Match Accuracy Leap</span>
+                </div>
+                <div class="impact-chip">
+                  <span class="num">4–5 Days</span>
+                  <span class="lbl">Saved Per 1,500 Accounts</span>
+                </div>
+              </div>
+              <div class="tech-stack-pills">
+                <span class="pill">Python</span>
+                <span class="pill">PySide6 (Qt)</span>
+                <span class="pill">RapidFuzz</span>
+                <span class="pill">Gradient Boosting</span>
+                <span class="pill">Sentence-Transformers</span>
+                <span class="pill">Salesforce CRM</span>
+              </div>
+            </div>
+
+            <!-- LIVE SIMULATOR WIDGET -->
+            <div class="inno-interactive-panel">
+              <div class="hud-panel-header">
+                <span class="panel-dot"></span>
+                <span>INTERACTIVE MATCHER SIMULATOR</span>
+                <span class="panel-mode">LIVE DEMO</span>
+              </div>
+              <div class="simulator-body">
+                <p class="sim-guide">Test how the fuzzy matching &amp; semantic normalizer identifies target accounts across dirty incoming variations:</p>
+                
+                <div class="sim-input-group">
+                  <label>Sample Incoming Dirty String:</label>
+                  <div class="sample-chips" id="matcherSamples">
+                    <button class="chip-btn" data-input="Phreesia Healthcare Tech LLC" data-master="Phreesia Inc.">Phreesia Healthcare Tech LLC</button>
+                    <button class="chip-btn" data-input="Rayden Design Studios Pvt" data-master="Rayden Design Studio Pvt Ltd">Rayden Design Studios Pvt</button>
+                    <button class="chip-btn" data-input="WNS Global Svcs Pune" data-master="WNS Global Services">WNS Global Svcs Pune</button>
+                  </div>
+                  <div class="input-with-button">
+                    <input type="text" id="matcherInput" value="Phreesia Healthcare Tech LLC" placeholder="Enter messy account name...">
+                    <button class="cyber-btn sm" id="runMatchBtn"><i class="fa-solid fa-play"></i> EVALUATE</button>
+                  </div>
+                </div>
+
+                <div class="sim-output-box" id="matcherOutput">
+                  <div class="sim-output-row">
+                    <span class="k">Master Target:</span>
+                    <span class="v" id="masterResult">Phreesia Inc.</span>
+                  </div>
+                  <div class="sim-output-row">
+                    <span class="k">RapidFuzz Token Set Ratio:</span>
+                    <span class="v score" id="tokenScore">88%</span>
+                  </div>
+                  <div class="sim-output-row">
+                    <span class="k">Embedding Cosine Distance:</span>
+                    <span class="v score" id="embedScore">0.94</span>
+                  </div>
+                  <div class="sim-output-row">
+                    <span class="k">Gradient Boost Decision:</span>
+                    <span class="v badge-match" id="finalDecision"><i class="fa-solid fa-circle-check"></i> HIGH CONFIDENCE MATCH (92.4%)</span>
+                  </div>
+                  <div class="sim-progress-bar">
+                    <div class="sim-bar-fill" id="simConfidenceBar" style="width: 92.4%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: 500k+ CONTACT MATCHER -->
+        <div class="inno-tab-content" id="tab-contact">
+          <div class="inno-grid">
+            <div class="inno-info-panel">
+              <div class="inno-tag">DATABASE UTILITY // SUB-5 MINUTE LOOKUP</div>
+              <h3 class="inno-title">500,000+ Salesforce Contact Lightning Search Engine</h3>
+              <p class="inno-text">
+                Built an indexed desktop search and deduplication engine querying over 500,000+ Salesforce contact records across multi-key identifiers (normalized name, domain-level email, clean phone).
+              </p>
+              <ul class="cyber-checklist">
+                <li><i class="fa-solid fa-check"></i> <strong>2 Hours to &lt; 5 Minutes:</strong> Slashed batch lookup time for incoming 500+ contact files.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Multi-Key Resolution:</strong> Handles fuzzy nicknames, company domain changes, and localized phone formatting.</li>
+                <li><i class="fa-solid fa-check"></i> <strong>Zero Latency:</strong> Local memory-mapped indexing prevents Salesforce API call ceiling bottlenecks.</li>
+              </ul>
+              <div class="tech-stack-pills">
+                <span class="pill">Python</span>
+                <span class="pill">SQLite / Indexed Cache</span>
+                <span class="pill">Salesforce SOQL</span>
+                <span class="pill">PySide6</span>
+              </div>
+            </div>
+
+            <div class="inno-interactive-panel benchmark-panel">
+              <div class="hud-panel-header">
+                <span class="panel-dot"></span>
+                <span>LOOKUP TIME BENCHMARK COMPARISON</span>
+              </div>
+              <div class="benchmark-body">
+                <div class="bench-item">
+                  <div class="bench-label">
+                    <span>LEGACY MANUAL SALESFORCE LOOKUP (500 Contacts)</span>
+                    <span class="time old">120 Minutes</span>
+                  </div>
+                  <div class="bench-track">
+                    <div class="bench-fill old" style="width: 100%;"></div>
+                  </div>
+                </div>
+
+                <div class="bench-item">
+                  <div class="bench-label">
+                    <span>DINESH'S CUSTOM CONTACT MATCHER ENGINE</span>
+                    <span class="time new">&lt; 4.8 Minutes</span>
+                  </div>
+                  <div class="bench-track">
+                    <div class="bench-fill new" style="width: 4%;"></div>
+                  </div>
+                </div>
+
+                <div class="benchmark-summary-badge">
+                  <i class="fa-solid fa-bolt-lightning"></i> <strong>96% SPEED MULTIPLIER (25x FASTER THROUGHPUT)</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: AI ACCOUNT ENRICHMENT -->
+        <div class="inno-tab-content" id="tab-enrichment">
+          <div class="inno-grid">
+            <div class="inno-info-panel">
+              <div class="inno-tag">GENERATIVE AI &amp; REVOPS PIPELINE</div>
+              <h3 class="inno-title">Autonomous Salesforce Account Enrichment Pipeline</h3>
+              <p class="inno-text">
+                Architected an end-to-end automation workflow replacing tedious manual research across Google and company portals. Synthesizes structured data from ZoomInfo API and LLMs (ChatGPT / Claude / Clay) to enrich 300+ healthcare and enterprise accounts monthly.
+              </p>
+              <div class="tech-stack-pills">
+                <span class="pill">Python</span>
+                <span class="pill">ZoomInfo REST API</span>
+                <span class="pill">OpenAI / Claude APIs</span>
+                <span class="pill">Clay Automation</span>
+                <span class="pill">Salesforce REST API</span>
+              </div>
+            </div>
+
+            <div class="inno-interactive-panel">
+              <div class="hud-panel-header">
+                <span class="panel-dot"></span>
+                <span>PIPELINE ARCHITECTURE TELEMETRY</span>
+              </div>
+              <div class="workflow-steps">
+                <div class="flow-step">
+                  <div class="step-num">01</div>
+                  <div class="step-content">
+                    <h4>Ingestion of Raw Target Accounts</h4>
+                    <p>Detects unenriched CRM accounts or inbound event lead lists via automated triggers.</p>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="step-num">02</div>
+                  <div class="step-content">
+                    <h4>ZoomInfo API Firmographic Query</h4>
+                    <p>Retrieves verified employee counts, annual revenue, tech stacks, and HQ metadata.</p>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="step-num">03</div>
+                  <div class="step-content">
+                    <h4>LLM Semantic Normalization &amp; Classification</h4>
+                    <p>ChatGPT / Claude parses unstructured medical practice types, specialty tags, and key decision makers.</p>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <div class="step-num">04</div>
+                  <div class="step-content">
+                    <h4>Salesforce CRM Auto-Sync</h4>
+                    <p>Pushes clean, verified, deduplicated fields directly into Salesforce with audit log timestamps.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: EXECUTIVE BI & POWER BI -->
+        <div class="inno-tab-content" id="tab-powerbi">
+          <div class="inno-grid">
+            <div class="inno-info-panel">
+              <div class="inno-tag">EXECUTIVE INTELLIGENCE // 20+ DASHBOARDS</div>
+              <h3 class="inno-title">Power BI Enterprise Reporting &amp; Revenue Analytics Hub</h3>
+              <p class="inno-text">
+                Designed, modeled, and maintained 20+ executive Power BI dashboards utilizing advanced DAX measures and Power Query M ETL pipelines to empower leadership with actionable visibility.
+              </p>
+              <div class="bi-metrics-list">
+                <div class="bi-pill"><i class="fa-solid fa-chart-pie"></i> Marketing ROI &amp; Revenue Attribution</div>
+                <div class="bi-pill"><i class="fa-solid fa-filter-circle-dollar"></i> Cost Per Lead (CPL) &amp; Customer Acquisition Cost (CAC)</div>
+                <div class="bi-pill"><i class="fa-solid fa-arrow-trend-up"></i> Multi-Stage Funnel Conversion Velocity</div>
+                <div class="bi-pill"><i class="fa-solid fa-handshake"></i> Trade Show Spend vs. Revenue Recovery Optimization</div>
+              </div>
+              <div class="tech-stack-pills">
+                <span class="pill">Power BI</span>
+                <span class="pill">Advanced DAX</span>
+                <span class="pill">Power Query (M)</span>
+                <span class="pill">Star Schema Modeling</span>
+                <span class="pill">Salesforce Analytics</span>
+              </div>
+            </div>
+
+            <div class="inno-interactive-panel">
+              <div class="hud-panel-header">
+                <span class="panel-dot"></span>
+                <span>INTERACTIVE KPI METRIC CONTROLLER</span>
+              </div>
+              <div class="kpi-interactive-display">
+                <div class="kpi-switch-buttons" id="kpiButtons">
+                  <button class="kpi-btn active" data-metric="roi">Marketing ROI</button>
+                  <button class="kpi-btn" data-metric="cpl">Cost Per Lead (CPL)</button>
+                  <button class="kpi-btn" data-metric="cac">Customer Acquisition (CAC)</button>
+                  <button class="kpi-btn" data-metric="tradeshow">Trade Show Recovery</button>
+                </div>
+                <div class="kpi-screen" id="kpiScreen">
+                  <div class="kpi-big-value" id="kpiValue">4.8x ROI</div>
+                  <div class="kpi-trend positive" id="kpiTrend"><i class="fa-solid fa-arrow-trend-up"></i> +34% YoY Attribution</div>
+                  <p class="kpi-explanation" id="kpiExpl">Comprehensive multi-touch attribution connecting Marketo nurture streams, Salesforce campaigns, and closed-won contract value.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL WORK EXPERIENCE TIMELINE -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-title-wrap">
+          <div class="cyber-badge"><i class="fa-solid fa-briefcase"></i> CAREER TRAJECTORY</div>
+          <h2 class="section-title">PROFESSIONAL <span class="accent-text">WORK EXPERIENCE</span></h2>
+          <p class="section-subtitle">Chronological record of analytics leadership, automation wins, and operational impact.</p>
+        </div>
+
+        <div class="experience-timeline">
+
+          <!-- ROLE 1: PHREESIA INDIA -->
+          <div class="timeline-card current-role">
+            <div class="card-hud-border"></div>
+            <div class="timeline-node">
+              <div class="node-pulse"></div>
+            </div>
+            
+            <div class="card-header">
+              <div class="role-meta">
+                <span class="company-badge"><i class="fa-solid fa-hospital"></i> PHREESIA INDIA</span>
+                <span class="mode-badge">Pune – Remote</span>
+              </div>
+              <div class="tenure-badge">Apr 2024 – Present <span class="current-tag">CURRENT ROLE</span></div>
+            </div>
+
+            <h3 class="role-title">Senior Analyst – Marketing Analytics</h3>
+            <div class="role-focus-tag"><i class="fa-solid fa-bullseye"></i> Core Focus: Data Research &amp; Salesforce Data Quality</div>
+
+            <div class="card-body">
+              <ul class="experience-list">
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Built Account Matcher / Duplicate Finder:</strong> Engineered a Python and PySide6 desktop application combining fuzzy matching (RapidFuzz) and machine learning (Gradient Boosting with sentence-transformer embeddings) to match a <strong>150,000+ row Salesforce master file</strong> against incoming lists averaging 1,500 accounts. Replaced Validity DemandTool, <strong>raising match accuracy from 5–10% to 70%+</strong> and saving <strong>4–5 days of manual review</strong> per 1,000–1,500 accounts.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Built Contact Matcher Engine:</strong> Created a desktop search tool querying <strong>500,000+ Salesforce contact records</strong> by name, email, or phone, slashing manual lookup time for 500+ contact files from <strong>2 hours to under 5 minutes</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Automated Salesforce Account Enrichment:</strong> Automated account enrichment for <strong>300+ accounts per monthly cycle</strong> using Python, PySide6, ZoomInfo API, and LLM APIs (ChatGPT/Clay), eliminating manual web research across Google and company websites.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Automated 15+ Reporting Pipelines:</strong> Built end-to-end data pipelines and automated dashboards using Power Query and Salesforce integrations, <strong>reducing manual reporting hours by 60%–70%</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Engineered 20+ Power BI Dashboards:</strong> Designed and maintained 20+ Power BI dashboards (DAX, Power Query M) tracking <strong>marketing ROI, cost per lead (CPL), customer acquisition cost (CAC), funnel conversion</strong>, and trade show spend versus revenue recovery for leadership budget planning.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>50+ Ad Hoc Analyses &amp; AI Coding Acceleration:</strong> Completed 50+ high-impact ad hoc analyses across marketing, sales, and executive leadership teams, and leveraged AI coding assistants to cut SQL, DAX, Power Query, and test-case iteration time by <strong>30%</strong>.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-footer-tags">
+              <span class="f-tag">Python (Pandas, PySide6, RapidFuzz)</span>
+              <span class="f-tag">Power BI &amp; DAX</span>
+              <span class="f-tag">Salesforce CRM</span>
+              <span class="f-tag">Gradient Boosting</span>
+              <span class="f-tag">ZoomInfo API</span>
+              <span class="f-tag">LLM APIs</span>
+            </div>
+          </div>
+
+          <!-- ROLE 2: RAYDEN DESIGN STUDIO -->
+          <div class="timeline-card">
+            <div class="card-hud-border"></div>
+            <div class="timeline-node"></div>
+            
+            <div class="card-header">
+              <div class="role-meta">
+                <span class="company-badge"><i class="fa-solid fa-building"></i> RAYDEN DESIGN STUDIO PVT LTD</span>
+                <span class="mode-badge">(A Phreesia Partner) • Pune – Remote</span>
+              </div>
+              <div class="tenure-badge">Oct 2022 – Mar 2024</div>
+            </div>
+
+            <h3 class="role-title">Sr. Analyst – Sales Enablement</h3>
+
+            <div class="card-body">
+              <ul class="experience-list">
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Annual &amp; Mid-Year Performance Review Program:</strong> Built and launched an automated performance review survey program using Qualtrics and Salesforce, paired with executive summary dashboards covering <strong>60 employees</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Sales Outreach Playbook Optimization:</strong> Analyzed Groove sales outreach data across <strong>15+ sales templates and workflows</strong> to pinpoint top-performing messaging and objection-handling strategies.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Multi-Platform Email Nurture Analytics:</strong> Combined Qlik, Marketo, and Salesforce datasets to monitor <strong>5+ email nurture campaigns</strong>, tying engagement signals directly to pipeline opportunities.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Sales Scorecard &amp; Coaching System:</strong> Architected sales performance and call scorecard reports for <strong>60 sales representatives and managers</strong> to guide targeted operational coaching.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-footer-tags">
+              <span class="f-tag">Sales Enablement</span>
+              <span class="f-tag">Qualtrics</span>
+              <span class="f-tag">Salesforce</span>
+              <span class="f-tag">Groove</span>
+              <span class="f-tag">Qlik</span>
+              <span class="f-tag">Marketo</span>
+            </div>
+          </div>
+
+          <!-- ROLE 3: WNS GLOBAL SERVICES -->
+          <div class="timeline-card">
+            <div class="card-hud-border"></div>
+            <div class="timeline-node"></div>
+            
+            <div class="card-header">
+              <div class="role-meta">
+                <span class="company-badge"><i class="fa-solid fa-globe"></i> WNS GLOBAL SERVICES</span>
+                <span class="mode-badge">Pune, India</span>
+              </div>
+              <div class="tenure-badge">Mar 2017 – Aug 2022 (5+ Yrs)</div>
+            </div>
+
+            <h3 class="role-title">Lead Associate – Quality</h3>
+
+            <div class="card-body">
+              <ul class="experience-list">
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Leadership Promotion &amp; Automation:</strong> Promoted from Senior Associate to Lead Associate to manage reporting and process automation across Pune and onshore international teams, <strong>improving reporting efficiency by 40%</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Dual-Geography Operational Dashboards:</strong> Built operational BI dashboards tracking agent performance, customer complaints, and quality scores across 2 geographies (Pune and onshore), <strong>expanding SLA/quality tracking coverage by 25%</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>40% Performance Uplift:</strong> Raised bottom-quartile agent performance by <strong>40%</strong> through data-backed coaching models and structured monitoring across a team of <strong>22 agents</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Cross-Department Standardization:</strong> Standardized daily reporting templates, KPI definitions, and QA scorecards across 3 key departments—Operations, Quality Assurance, and Training.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-footer-tags">
+              <span class="f-tag">Quality Assurance</span>
+              <span class="f-tag">Process Automation</span>
+              <span class="f-tag">Operational BI</span>
+              <span class="f-tag">SLA Tracking</span>
+              <span class="f-tag">Cross-Functional Leadership</span>
+            </div>
+          </div>
+
+          <!-- ROLE 4: CAPITA -->
+          <div class="timeline-card">
+            <div class="card-hud-border"></div>
+            <div class="timeline-node"></div>
+            
+            <div class="card-header">
+              <div class="role-meta">
+                <span class="company-badge"><i class="fa-solid fa-network-wired"></i> CAPITA</span>
+                <span class="mode-badge">Pune, India</span>
+              </div>
+              <div class="tenure-badge">Feb 2014 – Aug 2016</div>
+            </div>
+
+            <h3 class="role-title">Senior Associate – Operations</h3>
+
+            <div class="card-body">
+              <ul class="experience-list">
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Product Launch Cycle Optimization:</strong> Streamlined product launch workflows across PIM, NMT, and FogBugz ticketing systems, <strong>reducing launch cycle turnaround time by 20%</strong>.
+                  </div>
+                </li>
+                <li>
+                  <i class="fa-solid fa-chevron-right bullet-icon"></i>
+                  <div>
+                    <strong>Comprehensive UX &amp; Listing Audits:</strong> Audited <strong>100+ website pages and commercial product listings</strong> to log content, metadata, and UX gaps, proactively resolving recurring defects before production release.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-footer-tags">
+              <span class="f-tag">Operations</span>
+              <span class="f-tag">PIM / NMT</span>
+              <span class="f-tag">Defect Tracking (FogBugz)</span>
+              <span class="f-tag">UX Auditing</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS NEURAL MATRIX -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-title-wrap">
+          <div class="cyber-badge"><i class="fa-solid fa-microchip"></i> CAPABILITIES MATRIX</div>
+          <h2 class="section-title">TECHNICAL <span class="accent-text">SKILLS &amp; ARSENAL</span></h2>
+          <p class="section-subtitle">Categorized competencies spanning data science, business intelligence, automation, and CRM.</p>
+        </div>
+
+        <div class="skills-filter-nav">
+          <button class="skill-filter-btn active" data-filter="all">All Disciplines</button>
+          <button class="skill-filter-btn" data-filter="prog">Programming &amp; Automation</button>
+          <button class="skill-filter-btn" data-filter="bi">BI &amp; Visualization</button>
+          <button class="skill-filter-btn" data-filter="crm">CRM &amp; Governance</button>
+          <button class="skill-filter-btn" data-filter="ml">Data Matching &amp; ML</button>
+          <button class="skill-filter-btn" data-filter="sales">Sales &amp; Research Tools</button>
+          <button class="skill-filter-btn" data-filter="cloud">Cloud</button>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+
+          <!-- PROGRAMMING & AUTOMATION -->
+          <div class="skill-card" data-category="prog">
+            <div class="skill-card-top">
+              <i class="fa-brands fa-python skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Python Data Ecosystem</h4>
+                <span class="category-name">Programming &amp; Automation</span>
+              </div>
+            </div>
+            <p class="skill-desc">Pandas, PySide6 (Qt GUI), RapidFuzz, Streamlit, and ETL automated scripts.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 95%;"></div></div>
+            <div class="skill-subtags">
+              <span>Pandas</span><span>PySide6</span><span>RapidFuzz</span><span>Streamlit</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="prog">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-database skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>SQL &amp; Query Optimization</h4>
+                <span class="category-name">Programming &amp; Automation</span>
+              </div>
+            </div>
+            <p class="skill-desc">Relational schema design, complex joins, subqueries, indexing, and window functions.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 90%;"></div></div>
+            <div class="skill-subtags">
+              <span>Complex Joins</span><span>Subqueries</span><span>Window Functions</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="prog">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-gears skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>ETL &amp; Power Automate</h4>
+                <span class="category-name">Programming &amp; Automation</span>
+              </div>
+            </div>
+            <p class="skill-desc">Power Automate cloud flows, Excel/CSV batch pipelines, automated file parsing.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 92%;"></div></div>
+            <div class="skill-subtags">
+              <span>Power Automate</span><span>Excel Macros</span><span>CSV Batching</span>
+            </div>
+          </div>
+
+          <!-- BI & VISUALIZATION -->
+          <div class="skill-card" data-category="bi">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-chart-simple skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Power BI &amp; Advanced DAX</h4>
+                <span class="category-name">BI &amp; Visualization</span>
+              </div>
+            </div>
+            <p class="skill-desc">20+ enterprise dashboards, complex calculated measures, time intelligence, dynamic filtering.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 96%;"></div></div>
+            <div class="skill-subtags">
+              <span>DAX Measures</span><span>Time Intelligence</span><span>RLS Security</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="bi">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-diagram-project skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Power Query (M Language)</h4>
+                <span class="category-name">BI &amp; Visualization</span>
+              </div>
+            </div>
+            <p class="skill-desc">Advanced data shaping, API connector feeds, custom M functions, and automated transformations.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 94%;"></div></div>
+            <div class="skill-subtags">
+              <span>M Language</span><span>ETL Shaping</span><span>API Parsing</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="bi">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-chart-pie skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Qlik &amp; Executive Dashboards</h4>
+                <span class="category-name">BI &amp; Visualization</span>
+              </div>
+            </div>
+            <p class="skill-desc">Executive reporting for C-suite, revenue operations KPIs, scorecard visualizations.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 88%;"></div></div>
+            <div class="skill-subtags">
+              <span>Qlik</span><span>Exec Dashboards</span><span>KPI Design</span>
+            </div>
+          </div>
+
+          <!-- CRM & DATA MANAGEMENT -->
+          <div class="skill-card" data-category="crm">
+            <div class="skill-card-top">
+              <i class="fa-brands fa-salesforce skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Salesforce CRM Operations</h4>
+                <span class="category-name">CRM &amp; Data Management</span>
+              </div>
+            </div>
+            <p class="skill-desc">Master data deduplication, account hierarchy cleanup, data enrichment, custom reports &amp; SOQL.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 95%;"></div></div>
+            <div class="skill-subtags">
+              <span>Deduplication</span><span>Account Hierarchy</span><span>SOQL Queries</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="crm">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-shield-virus skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Data Quality &amp; Governance</h4>
+                <span class="category-name">CRM &amp; Data Management</span>
+              </div>
+            </div>
+            <p class="skill-desc">Data cleansing protocols, audit rules, governance standards, and RevOps support.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 92%;"></div></div>
+            <div class="skill-subtags">
+              <span>Data Cleansing</span><span>Governance</span><span>RevOps Support</span>
+            </div>
+          </div>
+
+          <!-- DATA MATCHING & APPLIED ML -->
+          <div class="skill-card" data-category="ml">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-code-merge skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Fuzzy Matching &amp; RapidFuzz</h4>
+                <span class="category-name">Data Matching &amp; Applied ML</span>
+              </div>
+            </div>
+            <p class="skill-desc">Token sort/set ratios, Levenshtein distance, phonetic indexing, high-speed C-backed matching.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 96%;"></div></div>
+            <div class="skill-subtags">
+              <span>RapidFuzz</span><span>Levenshtein</span><span>Phonetic Normalization</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="ml">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-brain skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Gradient Boosting &amp; Embeddings</h4>
+                <span class="category-name">Data Matching &amp; Applied ML</span>
+              </div>
+            </div>
+            <p class="skill-desc">Sentence-transformer vector embeddings, cosine similarity, Gradient Boosting classifier.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 88%;"></div></div>
+            <div class="skill-subtags">
+              <span>Sentence Transformers</span><span>Cosine Similarity</span><span>Gradient Boosting</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="ml">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-wand-magic-sparkles skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>LLM Workflow Automation</h4>
+                <span class="category-name">Data Matching &amp; Applied ML</span>
+              </div>
+            </div>
+            <p class="skill-desc">Prompt engineering, API integration with OpenAI, Claude, Gemini, Clay AI web automation.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 90%;"></div></div>
+            <div class="skill-subtags">
+              <span>ChatGPT API</span><span>Claude API</span><span>Gemini</span><span>Clay</span>
+            </div>
+          </div>
+
+          <!-- MARKETING & SALES RESEARCH TOOLS -->
+          <div class="skill-card" data-category="sales">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-magnifying-glass-chart skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Marketing &amp; Sales Stack</h4>
+                <span class="category-name">Marketing &amp; Sales Research Tools</span>
+              </div>
+            </div>
+            <p class="skill-desc">Marketo email nurtures, Qualtrics survey architecture, Groove cadence analytics, ZoomInfo API.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 90%;"></div></div>
+            <div class="skill-subtags">
+              <span>Marketo</span><span>Qualtrics</span><span>Groove</span><span>ZoomInfo API</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-category="sales">
+            <div class="skill-card-top">
+              <i class="fa-solid fa-chess-knight skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Market &amp; Competitive Analysis</h4>
+                <span class="category-name">Marketing &amp; Sales Research Tools</span>
+              </div>
+            </div>
+            <p class="skill-desc">Target addressable market sizing, competitive benchmarking, buyer persona research.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 91%;"></div></div>
+            <div class="skill-subtags">
+              <span>TAM Sizing</span><span>Competitor Tracking</span><span>Healthcare SaaS</span>
+            </div>
+          </div>
+
+          <!-- CLOUD PLATFORMS -->
+          <div class="skill-card" data-category="cloud">
+            <div class="skill-card-top">
+              <i class="fa-brands fa-microsoft skill-icon"></i>
+              <div class="skill-title-grp">
+                <h4>Microsoft Azure Cloud</h4>
+                <span class="category-name">Cloud Platforms</span>
+              </div>
+            </div>
+            <p class="skill-desc">Azure cloud ecosystem, cloud storage, enterprise data integration pipelines.</p>
+            <div class="skill-meter"><div class="meter-fill" style="width: 85%;"></div></div>
+            <div class="skill-subtags">
+              <span>Microsoft Azure</span><span>Cloud Storage</span><span>Enterprise Pipelines</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE CYBER TERMINAL CLI -->
+    <section class="section" id="terminal-section">
+      <div class="container">
+        <div class="section-title-wrap">
+          <div class="cyber-badge"><i class="fa-solid fa-terminal"></i> INTERACTIVE INTERFACE</div>
+          <h2 class="section-title">COMMAND LINE <span class="accent-text">DOSSIER INTERFACE</span></h2>
+          <p class="section-subtitle">Interact with Dinesh Malvey's profile directly through a futuristic simulated cyber terminal.</p>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-titlebar">
+            <div class="terminal-dots">
+              <span class="tdot red"></span>
+              <span class="tdot yellow"></span>
+              <span class="tdot green"></span>
+            </div>
+            <div class="terminal-title">dinesh_malvey@terminal:~$ -- zsh (sys_intel v3.8)</div>
+            <div class="terminal-badge">READY</div>
+          </div>
+
+          <div class="terminal-content" id="terminalOutput">
+            <div class="term-line welcome">===============================================================</div>
+            <div class="term-line welcome glow">DINESH MALVEY // EXECUTIVE DATA ANALYST TERMINAL v3.8</div>
+            <div class="term-line welcome">System initialized. Type <span class="highlight-cmd">help</span> for available commands.</div>
+            <div class="term-line welcome">===============================================================</div>
+          </div>
+
+          <div class="terminal-quick-chips">
+            <span class="quick-label">QUICK COMMANDS:</span>
+            <button class="t-chip" data-cmd="help">help</button>
+            <button class="t-chip" data-cmd="summary">summary</button>
+            <button class="t-chip" data-cmd="skills">skills</button>
+            <button class="t-chip" data-cmd="experience">experience</button>
+            <button class="t-chip" data-cmd="impact">impact</button>
+            <button class="t-chip" data-cmd="contact">contact</button>
+            <button class="t-chip" data-cmd="clear">clear</button>
+          </div>
+
+          <form class="terminal-input-row" id="terminalForm">
+            <span class="terminal-prompt">user@antigravity:~$</span>
+            <input type="text" id="terminalInput" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g., 'help', 'skills', 'experience')...">
+            <button type="submit" class="term-exec-btn"><i class="fa-solid fa-angles-right"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & LANGUAGES -->
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-title-wrap">
+          <div class="cyber-badge"><i class="fa-solid fa-graduation-cap"></i> CREDENTIALS &amp; DIALECTS</div>
+          <h2 class="section-title">ACADEMICS <span class="accent-text">&amp; LANGUAGES</span></h2>
+        </div>
+
+        <div class="edu-lang-grid">
+          <!-- EDUCATION CARD -->
+          <div class="edu-card">
+            <div class="edu-card-header">
+              <div class="edu-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="edu-title-grp">
+                <span class="edu-tag">UNDERGRADUATE DEGREE</span>
+                <h3>Bachelor of Commerce (B.Com)</h3>
+                <h4 class="edu-inst">Mahatma Gandhi University</h4>
+              </div>
+            </div>
+            <div class="edu-meta-row">
+              <span class="meta-pill"><i class="fa-solid fa-calendar"></i> 2013 – 2015</span>
+              <span class="meta-pill"><i class="fa-solid fa-circle-check"></i> Graduated</span>
+            </div>
+            <p class="edu-note">Comprehensive foundation in business economics, quantitative methods, commercial statistics, accounting principles, and business intelligence.</p>
+          </div>
+
+          <!-- LANGUAGES CARD -->
+          <div class="lang-card">
+            <div class="lang-card-header">
+              <div class="edu-icon-wrap"><i class="fa-solid fa-language"></i></div>
+              <div class="edu-title-grp">
+                <span class="edu-tag">GLOBAL COMMUNICATION</span>
+                <h3>Language Proficiencies</h3>
+                <h4 class="edu-inst">Multilingual Communication Capabilities</h4>
+              </div>
+            </div>
+
+            <div class="language-bars">
+              <div class="lang-item">
+                <div class="lang-info">
+                  <span class="l-name"><i class="fa-solid fa-comment-dots"></i> English</span>
+                  <span class="l-level">Professional &amp; Business Fluent</span>
+                </div>
+                <div class="lang-meter"><div class="lang-fill" style="width: 100%;"></div></div>
+              </div>
+
+              <div class="lang-item">
+                <div class="lang-info">
+                  <span class="l-name"><i class="fa-solid fa-comment-dots"></i> Hindi</span>
+                  <span class="l-level">Native / Bilingual Proficiency</span>
+                </div>
+                <div class="lang-meter"><div class="lang-fill" style="width: 100%;"></div></div>
+              </div>
+
+              <div class="lang-item">
+                <div class="lang-info">
+                  <span class="l-name"><i class="fa-solid fa-comment-dots"></i> Marathi</span>
+                  <span class="l-level">Professional Working Proficiency</span>
+                </div>
+                <div class="lang-meter"><div class="lang-fill" style="width: 85%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSMIT / CONTACT SECTION -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-title-wrap">
+          <div class="cyber-badge"><i class="fa-solid fa-satellite-dish"></i> TRANSMIT SIGNAL</div>
+          <h2 class="section-title">ESTABLISH <span class="accent-text">CONNECTION</span></h2>
+          <p class="section-subtitle">Open for high-impact Senior Data Analyst, Analytics Engineering, and BI leadership opportunities.</p>
+        </div>
+
+        <div class="contact-hud-frame">
+          <div class="contact-grid">
+
+            <!-- CONTACT DETAILS -->
+            <div class="contact-info-deck">
+              <h3 class="c-deck-title">DIRECT COMMS CHANNELS</h3>
+              <p class="c-deck-sub">Direct access to Dinesh Malvey for recruiting, consultation, or technical collaborations.</p>
+
+              <div class="comms-list">
+                <div class="comms-item">
+                  <div class="comms-icon"><i class="fa-solid fa-envelope"></i></div>
+                  <div class="comms-details">
+                    <span class="comms-label">ELECTRONIC MAIL</span>
+                    <a href="mailto:dinesh.malvey@hotmail.com" class="comms-value">dinesh.malvey@hotmail.com</a>
+                  </div>
+                  <button class="copy-comms-btn copy-trigger" data-copy="dinesh.malvey@hotmail.com" title="Copy Email">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+
+                <div class="comms-item">
+                  <div class="comms-icon"><i class="fa-solid fa-phone"></i></div>
+                  <div class="comms-details">
+                    <span class="comms-label">VOICE / CELLULAR</span>
+                    <a href="tel:+918055111164" class="comms-value">+91 8055111164</a>
+                  </div>
+                  <button class="copy-comms-btn copy-trigger" data-copy="8055111164" title="Copy Phone">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+
+                <div class="comms-item">
+                  <div class="comms-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                  <div class="comms-details">
+                    <span class="comms-label">LINKEDIN NETWORK</span>
+                    <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="comms-value">linkedin.com/in/dineshmalvey</a>
+                  </div>
+                  <a href="https://linkedin.com/in/dineshmalvey" target="_blank" rel="noopener noreferrer" class="copy-comms-btn" title="Open LinkedIn Profile">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+
+                <div class="comms-item">
+                  <div class="comms-icon"><i class="fa-solid fa-location-dot"></i></div>
+                  <div class="comms-details">
+                    <span class="comms-label">BASE LOCATION</span>
+                    <span class="comms-value">Rajsamand, Rajasthan, India</span>
+                  </div>
+                  <span class="badge-status">OPEN TO REMOTE</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- TRANSMISSION FORM SIMULATOR -->
+            <div class="contact-form-panel">
+              <div class="hud-panel-header">
+                <span class="panel-dot"></span>
+                <span>TRANSMISSION PACKET DISPATCHER</span>
+              </div>
+              <form class="transmission-form" id="transmissionForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="senderName"><i class="fa-solid fa-user"></i> SENDER IDENTIFIER</label>
+                    <input type="text" id="senderName" required placeholder="Your Name / Organization">
+                  </div>
+                  <div class="form-group">
+                    <label for="senderEmail"><i class="fa-solid fa-at"></i> RETURN FREQUENCY (EMAIL)</label>
+                    <input type="email" id="senderEmail" required placeholder="name@company.com">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="msgSubject"><i class="fa-solid fa-tag"></i> MISSION SUBJECT</label>
+                  <input type="text" id="msgSubject" required placeholder="Role Opportunity / Collaboration / Inquiry">
+                </div>
+
+                <div class="form-group">
+                  <label for="msgBody"><i class="fa-solid fa-align-left"></i> TRANSMISSION PAYLOAD</label>
+                  <textarea id="msgBody" rows="4" required placeholder="Type your message or project specs here..."></textarea>
+                </div>
+
+                <button type="submit" class="cyber-btn primary full-width" id="dispatchBtn">
+                  <i class="fa-solid fa-paper-plane"></i> TRANSMIT VIA EMAIL CLIENT
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PRINT-ONLY CLEAN RESUME CONTAINER -->
+  <div class="print-resume-document" id="printResumeArea">
+    <div class="print-header">
+      <h1 class="print-name">DINESH MALVEY</h1>
+      <div class="print-title">Senior Data Analyst | Market Research, Business Intelligence &amp; Process Automation</div>
+      <div class="print-contact">
+        Rajsamand, Rajasthan, India | 8055111164 | dinesh.malvey@hotmail.com | linkedin.com/in/dineshmalvey
+      </div>
+    </div>
+
+    <div class="print-section">
+      <h2 class="print-sec-heading">PROFESSIONAL SUMMARY</h2>
+      <p class="print-text">
+        Senior Data Analyst with 9+ years of experience across data analytics, business intelligence (BI), CRM data quality, and reporting automation, including 4+ years supporting US healthcare-tech SaaS marketing and sales operations. Hands-on across Power BI (DAX, Power Query), Python, SQL, and Salesforce CRM. Track record of replacing slow manual workflows and third-party tools with practical Python applications and automated reporting pipelines—cutting manual reporting effort by 85% and saving 4–5 days per data-matching cycle.
+      </p>
+    </div>
+
+    <div class="print-section">
+      <h2 class="print-sec-heading">TECHNICAL SKILLS</h2>
+      <ul class="print-bullets">
+        <li><strong>Programming &amp; Automation:</strong> Python (Pandas, PySide6, RapidFuzz, Streamlit), SQL, Power Automate, Excel/CSV Automation, ETL Pipelines</li>
+        <li><strong>Business Intelligence &amp; Visualization:</strong> Power BI, DAX, Power Query (M), Qlik, KPI &amp; Executive Dashboard</li>
+        <li><strong>CRM &amp; Data Management:</strong> Salesforce CRM (Deduplication, Account Hierarchy Cleanup, Data Enrichment), CRM Analytics, Data Quality &amp; Governance, Data Cleansing, Revenue Operations (RevOps) Support</li>
+        <li><strong>Data Matching &amp; Applied ML:</strong> Fuzzy Matching (RapidFuzz), Gradient Boosting, Sentence Transformers, LLM Workflow Automation (OpenAI, Claude, Gemini)</li>
+        <li><strong>Marketing, Sales &amp; Research Tools:</strong> Marketo, Qualtrics, Groove, ZoomInfo API, Market Research, Competitive Analysis</li>
+        <li><strong>Cloud Platforms:</strong> Azure</li>
+      </ul>
+    </div>
+
+    <div class="print-section">
+      <h2 class="print-sec-heading">WORK EXPERIENCE</h2>
+      
+      <div class="print-job">
+        <div class="print-job-header">
+          <strong>Senior Analyst – Marketing Analytics</strong>
+          <span>Apr 2024 – Present</span>
+        </div>
+        <div class="print-company">Phreesia India (Pune – Remote)</div>
+        <div class="print-focus">Data Research &amp; Salesforce Data Quality (current focus):</div>
+        <ul class="print-bullets">
+          <li>Built Account Matcher/ Duplicate finder, a Python and PySide6 desktop app combining fuzzy matching (RapidFuzz) and machine learning (Gradient Boosting with sentence-transformer embeddings), to match a 150,000+ row Salesforce master file against incoming lists averaging 1,500 accounts. Replaced Validity DemandTool, raising match accuracy from 5–10% to 70%+ and saving 4–5 days of manual review per 1,000–1,500 accounts.</li>
+          <li>Built Contact Matcher, a desktop search tool querying 500,000+ Salesforce contact records by name, email, or phone, cutting manual lookup time for 500+ contact files from 2 hours to under 5 minutes.</li>
+          <li>Automated Salesforce account enrichment for 300+ accounts per monthly cycle using Python, PySide6, ZoomInfo, and LLM APIs (ChatGPT/Clay), replacing manual web research across Google and company websites.</li>
+          <li>Automated 15+ reporting pipelines and dashboards using Power Query, and Salesforce integrations, reducing manual reporting hours by 60%-70%.</li>
+          <li>Built and maintained 20+ Power BI dashboards (DAX, Power Query M) tracking marketing ROI, cost per lead (CPL), customer acquisition cost (CAC), funnel conversion, and trade show spend versus revenue recovery for budget planning.</li>
+          <li>Completed 50+ ad hoc analyses across marketing, sales, and leadership teams, and used AI coding assistants to cut SQL, DAX, Power Query, and test-case iteration time by 30%.</li>
+        </ul>
+      </div>
+
+      <div class="print-job">
+        <div class="print-job-header">
+          <strong>Sr. Analyst – Sales Enablement</strong>
+          <span>Oct 2022 – Mar 2024</span>
+        </div>
+        <div class="print-company">Rayden Design Studio Pvt Ltd (A Phreesia Partner), Pune – Remote</div>
+        <ul class="print-bullets">
+          <li>Built and launched an annual and mid-year performance review survey program using Qualtrics and Salesforce, paired with summary dashboards covering 60 employees.</li>
+          <li>Analyzed Groove outreach data across 15+ sales templates and workflows to pinpoint top-performing messaging, informing the sales enablement playbook.</li>
+          <li>Combined Qlik, Marketo, and Salesforce datasets to track email nurture campaigns across 5+ campaigns, tying engagement metrics to pipeline activity.</li>
+          <li>Built sales performance and call scorecard reports for 60 reps and managers to guide targeted team coaching.</li>
+        </ul>
+      </div>
+
+      <div class="print-job">
+        <div class="print-job-header">
+          <strong>Lead Associate – Quality</strong>
+          <span>Mar 2017 – Aug 2022</span>
+        </div>
+        <div class="print-company">WNS Global Services, Pune</div>
+        <ul class="print-bullets">
+          <li>Promoted from Senior Associate to Lead Associate to run reporting and process automation across Pune and onshore teams, improving reporting efficiency by 40%.</li>
+          <li>Built operational dashboards tracking agent performance, customer complaints, and quality scores across 2 geographies (Pune and onshore), improving SLA/quality tracking coverage by 25%.</li>
+          <li>Raised bottom-quartile agent performance by 40% through analytics-backed coaching and structured monitoring across a team of 22 agents.</li>
+          <li>Standardized daily reporting templates and definitions across 3 departments—Operations, Quality Assurance, and Training.</li>
+        </ul>
+      </div>
+
+      <div class="print-job">
+        <div class="print-job-header">
+          <strong>Senior Associate – Operations</strong>
+          <span>Feb 2014 – Aug 2016</span>
+        </div>
+        <div class="print-company">Capita, Pune</div>
+        <ul class="print-bullets">
+          <li>Streamlined product launch workflows across PIM, NMT, and FogBugz, reducing launch cycle time by 20%.</li>
+          <li>Audited 100+ website pages and product listings to log content and UX gaps, resolving recurring defects before release.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="print-section">
+      <h2 class="print-sec-heading">EDUCATION</h2>
+      <div class="print-job-header">
+        <strong>Bachelor of Commerce (B.Com)</strong>
+        <span>(2013 – 2015)</span>
+      </div>
+      <div class="print-company">Mahatma Gandhi University</div>
+    </div>
+
+    <div class="print-section">
+      <h2 class="print-sec-heading">LANGUAGES</h2>
+      <p class="print-text">English, Marathi, Hindi</p>
+    </div>
+  </div>
+
+  <!-- FLOATING HUD FOOTER -->
+  <footer class="hud-footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="ft-logo">DINESH MALVEY</span>
+        <span class="ft-sub">// PORTFOLIO OS v3.8 • GITHUB PAGES READY</span>
+      </div>
+      <div class="footer-center">
+        <span class="live-clock" id="liveClock">UTC+05:30 // 00:00:00</span>
+      </div>
+      <div class="footer-right">
+        <a href="#hero" class="back-to-top" id="backToTop"><i class="fa-solid fa-chevron-up"></i> TOP</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION HUD -->
+  <div class="cyber-toast" id="cyberToast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span class="toast-msg">COPIED TO CLIPBOARD</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
